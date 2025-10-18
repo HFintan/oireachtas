@@ -1,0 +1,40 @@
+<form id="checklistForm">
+  <h3>Roghnaí d'imeachtaí:</h3>
+<label><input type="checkbox" name="item" value="1"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
+<label><input type="checkbox" name="item" value="12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b>"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
+<label><input type="checkbox" name="item" value="13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> Seoladh ó Dara Calleary <b>ICC</b>"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> Seoladh ó Dara Calleary <b>ICC</b> </label><br>
+<label><input type="checkbox" name="item" value="14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b>"> 14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
+<label><input type="checkbox" name="item" value="15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta á sheoladh <b>An Stiúideo, Bunurlár, ICC</b>"> 15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta á sheoladh <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
+<label><input type="checkbox" name="item" value="16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, Béal Feirste, BT 12 4AL</b>"> 16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, Béal Feirste, BT 12 4AL</b> </label><br>
+<label><input type="checkbox" name="item" value="18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, Béal Feirste, BT15 2GZ</b> **DÍOLTA AMACH**"> 18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, Béal Feirste, BT15 2GZ</b> **DÍOLTA AMACH** </label><br>
+<label><input type="checkbox" name="item" value="19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach, Béal Feirste</b>"> 19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach, Béal Feirste</b> </label><br>
+<label><input type="checkbox" name="item" value="20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ar www.tg4.ie <b>Halla na Cathrach, Béal Feirste</b>"> 20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ar www.tg4.ie <b>Halla na Cathrach, Béal Feirste</b> </label><br>
+
+  <!-- Add as many items as you want -->
+
+  <br><button type="button" onclick="showSelected()">Cruthaigh an liosta</button>
+</form>
+
+<hr>
+
+<div id="output" style="display:none;">
+  <h3>✅ Imeachtaí roghnaithe agat:</h3>
+  <ul id="selectedList"></ul>
+  <button onclick="window.print()">🖨️  Priondáil</button>
+</div>
+
+<script>
+  function showSelected() {
+    const checkedItems = document.querySelectorAll('input[name="item"]:checked');
+    const list = document.getElementById("selectedList");
+    list.innerHTML = '';
+    
+    checkedItems.forEach(item => {
+      const li = document.createElement("li");
+      li.innerItem = item.value;
+      list.appendChild(li);
+    });
+
+    document.getElementById("output").style.display = "block";
+  }
+</script>
