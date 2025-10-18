@@ -10,64 +10,55 @@
       margin: auto;
       padding: 2rem;
     }
+
     label {
       display: block;
       margin: 0.5rem 0;
     }
+
     #output {
       display: none;
       margin-top: 2rem;
       background: #f9f9f9;
       padding: 1rem;
       border-radius: 8px;
-
-      @media print {
-  body, html {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  body * {
-    visibility: hidden;
-  }
-
-  #output, #output * {
-    visibility: visible;
-  }
-
-  #output {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0.5cm; /* small padding so text isn’t right against edge */
-    font-size: 10pt; /* smaller font size for printing */
-    box-sizing: border-box;
-  }
-
-  #output ul {
-    padding-left: 1rem;
-  }
-}
-
     }
 
-    /* 👇 Print only the selected list */
+    #output ul {
+      padding-left: 1.5rem;
+    }
+
+    /* Print Styles */
     @media print {
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        font-size: 10pt;
+      }
+
       body * {
         visibility: hidden;
       }
+
       #output, #output * {
         visibility: visible;
       }
+
       #output {
         position: absolute;
         top: 0;
         left: 0;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0.5cm;
+        box-sizing: border-box;
+      }
+
+      #output button {
+        display: none; /* Hide print button when printing */
       }
     }
   </style>
@@ -139,9 +130,9 @@
       list.innerHTML = '';
 
       checkedItems.forEach(item => {
-        const label = item.parentElement; // get the label that contains the text
-        const labelCopy = label.cloneNode(true); // copy label
-        labelCopy.querySelector('input').remove(); // remove the checkbox
+        const label = item.parentElement;
+        const labelCopy = label.cloneNode(true);
+        labelCopy.querySelector('input').remove();
 
         const li = document.createElement("li");
         li.innerHTML = labelCopy.innerHTML.trim();
