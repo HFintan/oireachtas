@@ -81,14 +81,14 @@
 
   <form id="checklistForm">
     <h3>Dé Céadaoin</h3>
-    <label><input type="checkbox" name="item"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
-    <label><input type="checkbox" name="item"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
-    <label><input type="checkbox" name="item"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> <b>ICC</b></label>
+    <label><input type="checkbox"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
+    <label><input type="checkbox"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
+    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> <b>ICC</b></label>
 
     <h3>Déardaoin</h3>
-    <label><input type="checkbox" name="item"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A</b></label>
-    <label><input type="checkbox" name="item"> 11:00 <i>AGALLAMH BEIRTE (B)</i> Iomaitheoirí idir 9-11 <b>Halla 2A</b></label>
-    <label><input type="checkbox" name="item"> 12:30 <i>VEIDHLÍN (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 3</b></label>
+    <label><input type="checkbox"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A</b></label>
+    <label><input type="checkbox"> 11:00 <i>AGALLAMH BEIRTE (B)</i> Iomaitheoirí idir 9-11 <b>Halla 2A</b></label>
+    <label><input type="checkbox"> 12:30 <i>VEIDHLÍN (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 3</b></label>
   </form>
 
   <br>
@@ -120,23 +120,25 @@
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
           const label = checkbox.parentElement;
+          const nodes = Array.from(label.childNodes).filter(n => n.nodeType !== 1 || n.tagName !== 'INPUT');
 
-          // Clone the label and remove input to get clean content
-          const clone = label.cloneNode(true);
-          clone.querySelector('input').remove();
-          const html = clone.innerHTML.trim();
+          // Extract time from text node
+          let time = '';
+          let title = '';
+          let location = '';
 
-          // Extract time
-          const timeMatch = html.match(/^\s*\d{1,2}:\d{2}/);
-          const time = timeMatch ? timeMatch[0].trim() : '';
-
-          // Extract <i> content for title
-          const titleMatch = html.match(/<i>(.*?)<\/i>/);
-          const title = titleMatch ? titleMatch[1] : '';
-
-          // Extract <b> content for location
-          const locationMatch = html.match(/<b>(.*?)<\/b>/);
-          const location = locationMatch ? locationMatch[1] : '';
+          nodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.match(/^\s*\d{1,2}:\d{2}/)) {
+              time = node.textContent.trim().split(' ')[0];
+            }
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              if (node.tagName === 'I') {
+                title = node.innerHTML;
+              } else if (node.tagName === 'B') {
+                location = node.innerHTML;
+              }
+            }
+          });
 
           const row = document.createElement('tr');
           row.innerHTML = `
@@ -149,11 +151,7 @@
         }
       });
 
-      if (anySelected) {
-        output.classList.remove('hidden');
-      } else {
-        output.classList.add('hidden');
-      }
+      output.classList.toggle('hidden', !anySelected);
     }
   </script>
 
