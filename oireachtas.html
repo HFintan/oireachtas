@@ -1,40 +1,122 @@
-<form id="checklistForm">
-  <h3>Roghnaí d'imeachtaí:</h3>
-<label><input type="checkbox" name="item" value="1"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" value="12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b>"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" value="13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> Seoladh ó Dara Calleary <b>ICC</b>"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> Seoladh ó Dara Calleary <b>ICC</b> </label><br>
-<label><input type="checkbox" name="item" value="14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b>"> 14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" value="15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta á sheoladh <b>An Stiúideo, Bunurlár, ICC</b>"> 15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta á sheoladh <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" value="16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, Béal Feirste, BT 12 4AL</b>"> 16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, Béal Feirste, BT 12 4AL</b> </label><br>
-<label><input type="checkbox" name="item" value="18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, Béal Feirste, BT15 2GZ</b> **DÍOLTA AMACH**"> 18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, Béal Feirste, BT15 2GZ</b> **DÍOLTA AMACH** </label><br>
-<label><input type="checkbox" name="item" value="19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach, Béal Feirste</b>"> 19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach, Béal Feirste</b> </label><br>
-<label><input type="checkbox" name="item" value="20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ar www.tg4.ie <b>Halla na Cathrach, Béal Feirste</b>"> 20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ar www.tg4.ie <b>Halla na Cathrach, Béal Feirste</b> </label><br>
+<!DOCTYPE html>
+<html lang="ga">
+<head>
+  <meta charset="UTF-8">
+  <title>Roghnaigh d'Imeachtaí</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    #output {
+      display: none;
+      margin-top: 2rem;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 8px;
+    }
 
-  <!-- Add as many items as you want -->
+    /* 👇 Print only the selected list */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #output, #output * {
+        visibility: visible;
+      }
+      #output {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
 
-  <br><button type="button" onclick="showSelected()">Cruthaigh an liosta</button>
-</form>
+  <h2>Roghnaigh d'imeachtaí</h2>
 
-<hr>
+  <form id="checklistForm">
+    <label>
+      <input type="checkbox" name="item">
+      11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b>
+    </label>
 
-<div id="output" style="display:none;">
-  <h3>✅ Imeachtaí roghnaithe agat:</h3>
-  <ul id="selectedList"></ul>
-  <button onclick="window.print()">🖨️  Priondáil</button>
-</div>
+    <label>
+      <input type="checkbox" name="item">
+      12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b>
+    </label>
 
-<script>
-  function showSelected() {
-    const checkedItems = document.querySelectorAll('input[name="item"]:checked');
-    const list = document.getElementById("selectedList");
-    list.innerHTML = '';
-    
-    checkedItems.forEach(item => {
-      const li = document.createElement("li");
-      li.innerItem = item.value;
-      list.appendChild(li);
-    });
+    <label>
+      <input type="checkbox" name="item">
+      13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> Seoladh ó Dara Calleary <b>ICC</b>
+    </label>
 
-    document.getElementById("output").style.display = "block";
-  }
-</script>
+    <label>
+      <input type="checkbox" name="item">
+      14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b>
+    </label>
+
+    <label>
+      <input type="checkbox" name="item">
+      15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta <b>An Stiúideo, Bunurlár, ICC</b>
+    </label>
+
+    <label>
+      <input type="checkbox" name="item">
+      16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, Béal Feirste, BT 12 4AL</b>
+    </label>
+
+    <label>
+      <input type="checkbox" name="item">
+      18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, Béal Feirste, BT15 2GZ</b> **DÍOLTA AMACH**
+    </label>
+
+    <label>
+      <input type="checkbox" name="item">
+      19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach, Béal Feirste</b>
+    </label>
+
+    <label>
+      <input type="checkbox" name="item">
+      20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ar www.tg4.ie <b>Halla na Cathrach, Béal Feirste</b>
+    </label>
+
+    <br>
+    <button type="button" onclick="showSelected()">Cruthaigh an liosta</button>
+  </form>
+
+  <div id="output">
+    <h3>✅ Imeachtaí roghnaithe agat:</h3>
+    <ul id="selectedList"></ul>
+    <button onclick="window.print()">🖨️ Priontáil</button>
+  </div>
+
+  <script>
+    function showSelected() {
+      const checkedItems = document.querySelectorAll('input[name="item"]:checked');
+      const list = document.getElementById("selectedList");
+      list.innerHTML = '';
+
+      checkedItems.forEach(item => {
+        const label = item.parentElement; // get the label that contains the text
+        const labelCopy = label.cloneNode(true); // copy label
+        labelCopy.querySelector('input').remove(); // remove the checkbox
+
+        const li = document.createElement("li");
+        li.innerHTML = labelCopy.innerHTML.trim();
+        list.appendChild(li);
+      });
+
+      document.getElementById("output").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
