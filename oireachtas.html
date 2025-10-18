@@ -20,6 +20,40 @@
       background: #f9f9f9;
       padding: 1rem;
       border-radius: 8px;
+
+      @media print {
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #output, #output * {
+    visibility: visible;
+  }
+
+  #output {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0.5cm; /* small padding so text isn’t right against edge */
+    font-size: 10pt; /* smaller font size for printing */
+    box-sizing: border-box;
+  }
+
+  #output ul {
+    padding-left: 1rem;
+  }
+}
+
     }
 
     /* 👇 Print only the selected list */
