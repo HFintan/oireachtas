@@ -30,37 +30,40 @@
 
     /* Print Styles */
     @media print {
-      body, html {
-        margin: 0;
-        padding: 0;
-        width: 100vw;
-        height: 100vh;
-        font-size: 10pt;
-      }
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-size: 8pt;
+    font-family: "Arial Narrow", sans-serif;
+    line-height: 1.1;
+  }
 
-      body * {
-        visibility: hidden;
-      }
+  body * {
+    visibility: hidden;
+  }
 
-      #output, #output * {
-        visibility: visible;
-      }
+  #output, #output * {
+    visibility: visible;
+  }
 
-      #output {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        margin: 0;
-        padding: 0.5cm;
-        box-sizing: border-box;
-      }
+  #output {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.2cm;
+    box-sizing: border-box;
+  }
 
-      #output button {
-        display: none; /* Hide print button when printing */
-      }
-    }
+  #output button {
+    display: none;
+  }
+
+  b, i {
+    font-weight: normal;
+    font-style: normal;
+  }
+}
   </style>
 </head>
 <body>
