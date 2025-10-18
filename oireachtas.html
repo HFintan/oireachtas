@@ -16,6 +16,10 @@
       margin: 0.5rem 0;
     }
 
+    h3 {
+      margin-top: 2rem;
+    }
+
     #output {
       display: none;
       margin-top: 2rem;
@@ -24,266 +28,135 @@
       border-radius: 8px;
     }
 
-    #output ul {
-      padding-left: 1.5rem;
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    /* Hide the 'Imeachtaí roghnaithe agat' section unless something is selected */
+    #output.hidden {
+      display: none;
     }
 
     /* Print Styles */
     @media print {
-  body, html {
-    margin: 0;
-    padding: 0;
-    font-size: 10pt;
-    font-family: "Arial Narrow", sans-serif;
-    line-height: 1.1;
-  }
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-size: 10pt;
+        font-family: "Arial Narrow", sans-serif;
+        line-height: 1.3;
+      }
 
-  body * {
-    visibility: hidden;
-  }
+      body * {
+        display: none;
+      }
 
-  #output, #output * {
-    visibility: visible;
-  }
+      #output, #output * {
+        display: block;
+        visibility: visible;
+      }
 
-  #output {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.2cm;
-    box-sizing: border-box;
-  }
+      #output {
+        position: static;
+        width: 100%;
+        padding: 0.5cm;
+        box-sizing: border-box;
+        background: none;
+      }
 
-  #output button {
-    display: none;
-  }
+      #output button {
+        display: none;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
 
   <h2>Roghnaigh d'imeachtaí</h2>
 
+  <!-- Event Form -->
   <form id="checklistForm">
-<label><input type="checkbox" name="item" > 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> <b>ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:30 <i>BRONNADH DHUAISEANNA LITEARTHA AN OIREACHTAIS</i> <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 15:30 <i>Ag scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta <b>An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>NOCHTADH PICTIÚIR IN ÓMÓS GHEARÓID UÍ CHAIREALLÁIN</i> <b>Raidió Fáilte, 30 Sráid Dhubhaise, BT 12 4AL</b> </label><br>
-<label><input type="checkbox" name="item" > 18:30 <i>CÁIS, CEOL 'S ÓL</i> <b>Áras Mhic Reachtain, 283-289 Bóthar Aontroma, BT15 2GZ</b> **DÍOLTA AMACH** </label><br>
-<label><input type="checkbox" name="item" > 19:30 <i>FÁILTIÚ NA nGRADAM CUMARSÁIDE</i> Fáiltiú Seaimpéin <b>Halla na Cathrach </b> </label><br>
-<label><input type="checkbox" name="item" > 20:00 <i>ÓCÁID BHRONNTA GHRADAIM CHUMARSÁIDE AN OIREACHTAIS</i> Beo ón Oireachtas ar www.tg4.ie <b>Halla na Cathrach </b> </label><br>
+    <h3>Dé Céadaoin</h3>
+    <label><input type="checkbox" name="item"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
+    <label><input type="checkbox" name="item"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
+    <label><input type="checkbox" name="item"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> <b>ICC</b></label>
 
-Déardaoin
-
-<label><input type="checkbox" name="item" > 10:00 <i>AGALLAMH BEIRTE (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 6-9 <b>Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 10:00 <i>AGALLAMH BEIRTE (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 11-13 <b>Halla 2B, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 10:00 <i>AITHRISEOIREACHT (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 3-5 <b>Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 10:00 - 17:00 <i>AN SEOMRA TEAGHLAIGH</i> <b>ARC, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 10:30 <i>SCÉALAÍOCHT (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 7-9 <b>Seomra Cruinnithe 1, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 10:30 <i>VEIDHLÍN (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 7-10 <b>Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 <i>AITHRISEOIREACHT (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 6-7 <b>Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 <i>AGALLAMH BEIRTE (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 9-11 <b>Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 - 12:00 <i>CRAOLADH BEO ÓN OIREACHTAS 'Barrscéalta'</i> Beo ar RTÉ Raidió na Gaeltachta <b>Raidió Fáilte, 30 Sráid Dhubhaise, BT 12 4AL</b> </label><br>
-<label><input type="checkbox" name="item" > 11:30 <i>SCÉALAÍOCHT (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 10-13 <b>Seomra Cruinnithe 1, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:30 <i>VEIDHLÍN (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 10-12  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:30 <i>AINMNIÚ ÁITEANNA AGUS COMHROINNT ÁITEANNA</i> Caint ar stair agus ar thodhchaí na n-ainmneacha logánta sa tuaisceart.<b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál</b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>AGALLAMH BEIRTE (D) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 14-17  <b> Halla 2B, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 12:15 <i>AITHRISEOIREACHT (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 8-9  <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 12:30 <i>VEIDHLÍN (C) COMÓRTAS DO DHAOINE ÓGA</i>i> Iomaitheoirí idir 14-17  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 12:30 <i>SCÉALAÍOCHT (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 14-17  <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>CEOL BEIRTE (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 7-10  <b> Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>SEOLADH OIFIGIÚIL: ‘Aonach an Oireachtais’ Ceol ó Burnchurch, ó 12:00 ar aghaidh.  <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:30 <i>AN FHEADÓG STÁIN (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 7-9  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:30 <i>AITHRISEOIREACHT (D) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 10-11  <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:45 <i>CEOL BEIRTE (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 11-12  <b> Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>AGALLAMH BEIRTE COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar www.tg4.ie <b> An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>LÚIBÍNÍ (A) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 6 -10  <b> Halla 2B, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>LOGAINMNEACHA MHAIGH EO</i> Cur i láthair ar ‘Logainmneacha agus Oidhreacht Dhún Chaocháin i mBarúntacht Iorrais, Condae Mhaigh Eo, 2004’<b> Svuít Copenhagen, Leibhéal 2, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>CAINT AGUS CUR I LÁTHAIR</i> Cur i láthair ar G. B. (Brendan) Adams, Caomhnóir na gCanúintí ag Iarsmalann Daonchultúir Uladh<b> Svuít Bhaile Átha Cliath, Leibhéal 2, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>SEOLADH SCÉAL.IE</i> Láithreán gréasáin úr (peig.ie mar a bhí) <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:15 <i>AN FHEADÓG STÁIN (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 10-11  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:30 <i>AITHRISEOIREACHT (E) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 12-13  <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 14:30 <i>CEOL BEIRTE (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 13-17  <b> Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>SCEITSE COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar www.tg4.ie <b> An Stiúideo, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>LÚIBÍNÍ (B) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 11-12  <b> Halla 2B, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>SEOLADH FOTHEIDIL</i>, córas a dhéanann trascríobh ar comhaid fuaime nó físeáin.<b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 15:15 <i>AN FHEADÓG STÁIN (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 12-14  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 15:30 <i>RAPCHEOL COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí faoi 10  <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 15:45 <i>LÚIBÍNÍ (C) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 14-17  <b> Halla 2B, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>SEOLADH LEABHAIR ’Katie agus an Pacáiste Rúnda’ le Éadaoin Ní Dhomhnaill <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:15 <i>AN FHEADÓG STÁIN (D) COMÓRTAS DO DHAOINE ÓGA</i> Iomaitheoirí idir 15-17  <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:30 <i>AN GHAEILGE AGUS AN DLÍ</i> <b> Teach an Dlí-Chumainn, 96 Sráid Victoria, BT1 3GN</b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>SEOLADH LEABHAIR 'Lá San Iodáil i 1945' le Maria Ní Mhurchú <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>GEARRSCANNÁN, PLÉ & AMHRÁIN</i> ‘Aisling fé Bhláth’, Clár faisnéise ag ceiliúradh scéim amhránaíochta Aisling Gheal, Múscraí.<b> Seomra Cruinnithe 1, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>SPRAOI AG AN OIREACHTAS & DIOSCÓ GAELACH NA SAMHNA & Siamsán na dTeidithe. Culaith bhréige i gcomhair na Samhna. <b> Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>DREAS CAINTE COMÓRTAS DO DHAOINE FÁSTA</i> <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>POP-UP GRÉASÁN</i> le Gréasán Gaeilge na hEarnála Poiblí <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>SCÉAL OILEÁIN</i> Léacht - Saothar Liam agus Thomáis Uí Fhlaithearta <b> Halla 2A, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 18:30 <i>SCÉALAÍOCHT</i> Comórtas Cáilithe do dhaoine fásta <b> An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 19:00 <i>SEAN-NÓS NA bhFEAR</i> Comórtas do dhaoine fásta beo ar RTÉ Raidió na Gaeltachta agus www.tg4.ie <b> An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 19:30 - 21:00 <i>CRAOLADH BEO</i> 'Blas' ar BBC Gaeilge.  <b> Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 19:30 - 20:30 <i>CRAOLADH BEO ÓN OIREACHTAS</i> '7 LÁ' craoladh beo ar TG4 <b> Beár, Leibhéal 2, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 19:30 <i> BANAT AL-QUDS / INÍONACHA IARÚSAILÉIN Cór agus grúpa ceoil uirlise as an bPalaistín <b>Halla Whitla, Ollscoil na Banríona, BT7 1NN</b> **Níl an ócáid seo clúdaithe san Ollthicéad** </label><br>
-<label><input type="checkbox" name="item" > 20:00 <i>DRÁMA</i> Faoi Dheireadh Thiar le Joe Steve Ó Neachtain <b> Amharclann Mhic Chionnaith, An Chultúrlann, Bóthar na bhFál</b> **Níl an dráma seo clúdaithe san Ollthicéad**  </label><br>
-<label><input type="checkbox" name="item" > 20:00 <i>FLIX FEIRSTE</i> Láinseáil Féile Scannánaíochta na Ceathrún Gaeltachta & Léiriú den scannán Kneecap.  <b> Barr an Tí, 12ú Urlár, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 21:00 <i>CEOLCHOIRM LITEARTHA</i> Léamh agus amhráin ó Breanndán Ó Beaglaoich sliochta as a leabhar Clann a Seanamhuintire.  <b> An Bálseomra, Bunurlár, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 22:00 <i>CLUB NA FÉILE</i> Ceol ó Na Railway Boys <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 22:30 <i>CLUB AMHRÁNAÍOCHTA</i> 'Casadh an tSúgáin' <b> An Bálseomra, Leibhéal 1, Óstán Europa</b> </label><br>
-
-Aoine
-
-<label><input type="checkbox" name="item" > 8:00 - 9:00 <i>CRAOLADH BEO</i> 'Adhmhaidin' ar RTÉ Raidió na Gaeltachta <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (A)</i> Iomaitheoirí idir 5-8 <b> An Bálseomra (Cuid 1-3), An Chéad Urlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (E) </i> Iomaitheoirí 13 <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (A) </i> Iomaitheoirí faoi 6 <b> Seomra Cruinnithe 1, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (D) </i> Iomaitheoirí 9 <b> Seomra Cruinnithe 2, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (G) </i> Iomaitheoirí idir 12-13 <b> Seomra Cruinnithe 3, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>CORN CUIMHNEACHÁIN AMHRÁNAITHE SEAN-NÓIS MHÚSCRAIGHE COMÓRTAS DO DHAOINE FÁSTA </i>Fir faoi 35 <b> Halla 2B, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 9:30 <i>CORN CUIMHNEACHÁIN SHEÁIN ÓIG UÍ THUAMA COMÓRTAS DO DHAOINE FÁSTA</i> Amhránaíocht ar an Sean-Nós: Mná faoi 35 <b> Halla 2A, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 10:00 - 11:00 <i>CRAOLADH BEO</i> 'Beo ar Maidin' ar Raidió Fáilte <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 10:00 - 17:00 <i>AN SEOMRA TEAGHLAIGH</i> <b> ARC, Bunurlár, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 10:30 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (B) </i> Iomaitheoirí 9-10 <b> An Bálseomra (Cuid 1-3), An Chéad Urlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 10:45 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (F) </i> Iomaitheoirí 14 <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 10:45 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (B) </i> Iomaitheoirí 7 <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (E) </i> Iomaitheoirí 10 <b> Seomra Cruinnithe 2, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 - 12:00 <i>CRAOLADH BEO ÓN OIREACHTAS 'Barrscéalta' Arna chraoladh beo ar RTÉ Raidió na Gaeltachta <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 <i>SEISIÚN EOLAIS: Slí na Gaeltachta</i> Siúlóid féinthreoraithe i mBéal Feirste. <b> Aonach an Oireachtais, Halla 1, Leibhéal 1,ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 11:00 <i>PLÉPHAINÉAL Ról na nGael i dTógáil Éire Nua</i> <b> An Stiúideo, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 11:30 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (H) </i> Iomaitheoirí 14-15 <b> Seomra Cruinnithe 3, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (C) </i> Iomaitheoirí 11 <b> An Bálseomra (Cuid 1-3), An Chéad Urlár, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (G) </i> Iomaitheoirí 15 <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (C) </i> Iomaitheoirí 8 <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>SEOLADH MíleGlór na nÓg</i> Áis nua do thaifeadadh ar líne de ghuthanna páistí.<b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 12:00 <i>MEITHEAL - CÉ A LÉIFIDH LEABHAR GAEILGE?</i> <b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál, Béal Feirste </b> </label><br>
-<label><input type="checkbox" name="item" > *12:00 - 15:00 <i>MÁISTIR-RANG AISTEOIREACHTA</i> os cionn 12 bliain d’aois.<b> An Leabharlann, Leibhéal 1, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (H) </i> Iomaitheoirí 16-17 <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (F) </i> Iomaitheoirí atá 11 <b> Seomra Cruinnithe 2, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós (D) </i> Iomaitheoirí atá 12 <b> An Bálseomra (Cuid 1-3), An Chéad Urlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>SEOLADH LEABHAIR</i> An Ghaeilge i lár Bhéal Feirste le Fionntán de Brún <b> Aonach an Oireachtais, Halla 1, Leibhéal 1,ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 - 15:00 <i>CRAOLADH BEO ÓN OIREACHTAS</i> ar Raidió Fáilte agus Raidió na Life <b> Mol na Meán, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 13:00 <i>PLÉPHAINÉAL TÉAMA: Ról na Gaeilge i bPríosún na Ceise Fada ‘70dí - ‘80dí</i><b> Beár 2, Leibhéal 2, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:30 <i>AMHRÁNAÍOCHT AR AN SEAN-NÓS (I) </i> Iomaitheoirí atá 16-17 <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:30 <i>CORN CUIMHNEACHÁIN AMHRÁNAITHE SEAN-NÓIS CHONAMARA</i> Amhránaíocht ar an Sean-Nós: Fir os cionn 35  <b> Halla 2B, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 13:30 - 16:00 <i>CEARDLANN PLEANÁLA TEANGA FHORAS NA GAEILGE</i> <b> Bálseomra (Cuid 4-5), Leibhéal 1, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>LÚIBÍNÍ: COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar www.tg4.ie <b> An Stiúideo, Bunurlár, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>RÉAMHBHABHTA: Damhsa ar an Sean-Nós</i> Comórtas do dhaoine fásta <b> An Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 14:00 <i>SEOLADH LEABHAIR<i> 'Seoda na Sean, Amhráin Ghaolainne agus Bhéarla ó Chairbre, ó Mhúscraí, agus ó cheantair eile i nDeas-Mhumhain' le Pádraig Mac Cárthaigh <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 14:00* <i>DRÁMA</i> Faoi Dheireadh Thiar le Joe Steve Ó Neachtain <b> Amharclann Mhic Chionnaith, An Chultúrlann, Bóthar na bhFál, Béal Feirste</b> </label><br>
-<label><input type="checkbox" name="item" > 14:30 <i>CORN MHÁIRE NIC DHONNCHADHA Amhránaíocht ar an Sean-Nós</i>: Mná os cionn 35 <b> Halla 2A, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>MÓRSHEOLADH LEABHAR BREAC </i> <b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál, Béal Feirste </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>ÁR dTEANGA, ÁR dTEICNEOLAÍOCHT</i> Intleacht Shaorga agus Todhchaí na Gaeilge agus Gaeltachta <b> Barr an Tí, Leibhéal 12, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 - 17:00 <i>CRAOLADH BEO ÓN OIREACHTAS</i> 'Pé Scéal É' beo ar RTÉ Raidió na Gaeltachta <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 15:00 <i>SEOLADH: An Leabharlann Fháilteach</i> Scéim nua ó Gaeilge365 chun úsáid na Gaeilge a neartú i leabharlanna poiblí. <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 15:30 <i>AMHRÁN SAOTHAIR COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar www.tg4.ie <b> An Stiúideo, Bunurlár, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>AMHRÁN NUACHUMTHA COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar www.tg4.ie <b> An Stiúideo, Bunurlár,  ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>TIONÓIL GÉARCHÉIME CEARTA</i> Plé a dhéanamh ar na chéad chéimeanna eile den fheachtas. <b> Beár 2, Leibhéal 2, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>SEOLADH SUÍOMH IDIRLÍON</i> fisanphobail.com Cúrsaí Gaeilge in Iarthar Bhéal Feirste<b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:00 <i>GEARRSCANNÁN</i> An tAon Éan Amháin <b> Svuít Bhaile Átha Cliath, Leibhéal 2, Óstán Europa</b> </label><br>
-<label><input type="checkbox" name="item" > 16:30 <i>CEARDLANN</i> Pléifear obair Thithe an Oireachtais<b> Seomra Cruinnithe 3, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 16:30 - 17:30 <i>FOCAL AR FHOCAL</i> Tionscadail Foclóireachta.  <b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 16:30 <i>PLÉPHAINÉAL</i> Litríocht do pháistí agus conas iad a spreagadh <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>CUIDEACHTA AG AN OIREACHTAS</i> Roghnófar buaiteoirí na dtóraíochtaí, sólaistí deasa ar fáil. <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>TAISPEÁNTAS CARTLANN GAEL LINN</i> <b> An Bálseomra (Cuid 1-3), Leibhéal 1, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 17:00 <i>SEOLADH LEABHAR</i> 'I Muinín na nDúl' le Máire Wren agus 'Dordéan' le Róise Ní Bhaoill. <b> Beár 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 17:30 <i>CRAOLADH BEO ÓN OIREACHTAS</i> Lár Stáitse beo ar TG4. <b> An Stáitse Mór, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>SCÉALAÍOCHT: Príomhchomórtas</i> Comórtas Do Dhaoine Fásta <b> An Stiúideo, Bunurlár, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>SEOLADH LEABHAIR</i> 'Sí' le Seán Ó Muireagáin <b> Beár 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 - 20:00 <i>CUISLE NA GAELTACHTA</i> Deis do Chuisle bualadh le chéile le haghaidh seisiún siamsaíochta. <b> ARC, Bunurlár, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>ÓCÁID CHEILIÚRTHA</i> Foilseacháin Ábhair Spioradálta (FÁS) ag ceiliúradh 70 bliain <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>PODCHRAOLADH BEO 'Coinne Chultúir'</i> ag Raidió RíRá <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:00 <i>SEOLADH & PLÉPHAINÉAL</i> ar leagan úrnua den phacáiste ‘Deiseanna Gairmeacha le Gaeilge: Do Ghairm, do Theanga, do Thodhchaí’ <b> Halla 2B, Leibhéal 1, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:30 <i>PLÉPHAINÉAL</i> Comhrá Cois Teallaigh le Comhaltaí Thithe an Oireachtais <b> Seomra Cruinnithe 3, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 18:30 <i>SEOLADH ÁBHAR AR DÚCHAS.IE</i> <b> Seomra Cruinnithe 2, Leibhéal 3, ICC </b> </label><br>
-<label><input type="checkbox" name="item" > 19:00* <i>SEOLADH CLÁR TG4</i> Scannán - AONTAS <b> Cineworld, Odyssey Arena, 2 Cé na Banríona, Béal Feirste BT3 9QQ</b>  </label><br>
-<label><input type="checkbox" name="item" > 19:30 <i>SEAN-NÓS NA mBAN COMÓRTAS DO DHAOINE FÁSTA</i> Beo ar RTÉ Raidió na Gaeltachta agus www.tg4.ie <b> An Halla Mór, Bunurlár, ICC</b> </label><br>
-<label><input type="checkbox" name="item" > 21:00 <i>CÓISIR NA MAC LÉINN</i> Cóisir gléasta le scoth an cheoil ó Burnchurch, Emma Ní Fhíoruisce agus aíonna speisialta eile á chur i láthair ag Hugh Mac Giolla Chearra.  <b> Bálseomra, Bunurlár, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 22:30 <i>AN CLUB AMHRÁNAÍOCHTA</i> 'Casadh an tSúgáin' <b> An Bálseomra (Cuid 1-3), Leibhéal 1, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 22:30 <i>SEOLADH DLÚTHDHIOSCA</i> 'Anáil an Dúchais' le Bríd Ní Mhaoilchiaráin <b> An Bálseomra (Cuid 1-3), Leibhéal 1, Óstán Europa </b> </label><br>
-<label><input type="checkbox" name="item" > 22:30 - 01:00 <i>CLUB NA FÉILE</i> Ceol ó Pólca 4 <b> Halla Uladh</b> </label><br>
-
-Satharn
-
-<label><input type="checkbox" name="item" >9:30 <i>#parkrunabú!</i>  Rith speisialta Oireachtas na Samhna 2025.  <b> Páirc na bhFál, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >10:00 <i>VEIDHLÍN COMÓRTAS DO DHAOINE FÁSTA</i> <b> An Stiúideo, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >10:30 <i>AONTAS NA SCRÍBHNEOIRÍ</i> Ollchruinniú an Oireachtais <b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál </b></label><br>
-<label><input type="checkbox" name="item" >10:30 <i>SCÉALTA NUA Ó GAOIS, DCU</i> Canúint.ie, Sráidaimn.ie agus Hiddenheritages.ai & uasdátú<b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b></label><br>
-<label><input type="checkbox" name="item" >11:00 <i>CEOL BEIRTE COMÓRTAS DO DHAOINE FÁSTA</i> <b> An Stiúideo, ICC </b></label><br>
-<label><input type="checkbox" name="item" >11:00 <i>SEIMINEÁR AN OIREACHTAIS</i> 'An ród seo romhainn' <b> Halla 2A, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >11:00 - 12:00 <i>CÓISIR CÚLA4</i> <b> Halla 2B, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >11:00 <i>SEOLADH LEABHAIR</i> Atrocity Ár le Ciarán  Ó Coigligh <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b></label><br>
-<label><input type="checkbox" name="item" >11:00 <i>LÉAMH DRÁMA</i> 'Muinín' le Pádraig Mac Oscair <b>  Barr an Tí, 12ú Urlár, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >11:30 <i>SEOLADH DLÚTHDHIOSCA</i> 'Amhráin Áine' le hÁine Durkin <b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >12:00 - 14:00 <i>CRAOLADH BEO</i> 'Seó an Oireachtais' ar RTÉ Raidió na Gaeltachta <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >12:00 <i>SPLÉACHADH AR CANÚINT.IE</i> <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b></label><br>
-<label><input type="checkbox" name="item" >12:00 <i>SEISIÚN EOLAIS Glórtha Nua</i> Glór na nDéise agus Glór Fir Ultach. Plé ar thábhacht na gcanúintí sa teic AI.<b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >12:00 - 16:00 <i>AN CLINIC LEABHAIR</i> Clinic Leabhar Pháistí Éireann <b> Seomra Boird 1, Leibhéal 2, ICC</b></label><br>
-<label><input type="checkbox" name="item" > 12:00        <i>ÁITRIBH NA nGAEL</i> Bailiúchán - Baile, Báid & An Bás <b>  Svuít Bhaile Átha Cliath, Leibhéal 2, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >12:30 <i>SEIMINEÁR</i> Iriseoireacht Chlóite na Gaeilge - Ré Nua? <b> Seomra Cruinnithe 3, Leibhéal 3, ICC </b></label><br>
-<label><input type="checkbox" name="item" >12:30 <i>PRÍOMHCHOMÓRTAIS DAMHSA AR AN SEAN-NÓS</i> Gach Aoisghrúpa Beo ar TG4 <b> An Halla Mór, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >12:30 <i>AMHRÁNAÍOCHT AONAIR NACH SEAN-NÓS Í</i> Comórtas do dhaoine fásta <b> An Stiúideo, ICC </b></label><br>
-<label><input type="checkbox" name="item" >13:00 <i>ÓCÁID ÓMÓIS DO PHÁDRAIG Ó SNODAIGH</i> <b> Amharclann Mhic Chionnaith, An Chultúrlann, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >13:00 <i>BREACADH ag Ceiliúradh 25 Bliain</i><b> ARC, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >13:00 - 15:00 <i>CRUINNIÚ NA gCLEASAITHE</i> Léamh drámaí, plé, srl. <b> Barr an Tí, 12ú Urlár, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >13:00 <i>AG CEILIÚRADH POBAL NA GAEILGE CHAISLEÁN UIDHILÍN</i><b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >13:30 <i>AMHRÁNAÍOCHT AONAIR LE TIONLACAN GIOTÁIR COMÓRTAS DO DHAOINE FÁSTA</i> i gcuimhne ar Albert Fry <b> An Stiúideo, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >14:00 <i>AN CHÚIRT FILÍOCHTA</i> Léamh agus cur in aithne d’fhilí <b> Amharclann Mhic Chionnaith, An Chultúrlann, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >14:00 <i>SEOLADH LEABHAIR</i> 'Cloch in Áit an Charnáin Seán Ó hEochaidh: Bailitheoir Béaloidis' le Pádraig Ó Tiarnaigh<b> Beár 2, Leibhéal 2, ICC </b></label><br>
-<label><input type="checkbox" name="item" >14:00 - 16:00 <i>CRAOLADH BEO</i> ar Raidió Fáilte agus Raidió na Life <b> Mol na Meán, Halla 1, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >14:00 - 15:00 <i>ÚSÁID FOCLÓIR.IE agus TEANGLANN.IE</i> Conas iad a úsáid, uasdátú, plé ina dhiaidh.<b> Seomra Cruinnithe 2, Leibhéal 3, ICC</b></label><br>
-<label><input type="checkbox" name="item" >14:00 <i>AG CEILIÚRADH POBAL NA GAEILGE BHÉAL FEIRSTE</i> <b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC</b></label><br>
-<label><input type="checkbox" name="item" >14:30 <i>SCLÉIP NA SAMHNA</i> <b> Beár, Bunurlár, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >15:00 <i>CRAOBH DÍOSPÓIREACHTA GAEL LINN</i> Do mhic léinn tríú leibhéil<b> Halla 2A, Leibhéal 1, ICC</b></label><br>
-<label><input type="checkbox" name="item" >15:00 <i>SEOLADH LEABHAIR</i> 'Fá Bhruach an Chladaigh' le Cormac Mac Giolla Easpaig<b> Beár 2, Leibhéal 2, ICC </b></label><br>
-<label><input type="checkbox" name="item" >15:00 - 17:00 <i>SIÚLÓID THREORAITHE</i> I lár chathair Bhéal Feirste <b>ÁIT TOSAITHE: Doirse tosaigh Primark, An Ascaill Ríoga, BT1 1BL</b> </label><br>
-<label><input type="checkbox" name="item" >16:00 <i>AN POD GAEILGE BEO!</i> An chéad seó beo riamh ag An Pod Gaeilge, sraith podchraoltaí Tuairisc <b> Seomra Cruinnithe 1, Leibhéal 3, ICC </b></label><br>
-<label><input type="checkbox" name="item" >16:00 <i>SLIOCHT - DINNSEANCHAS</i> Plé ar an dinnseanchas i litríocht na Gaeilge <b> Amharclann Mhic Chionnaith, An Chultúrlann, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >16:00 <i>SEOLADH CLÁIRSEACH ÚRNUA</i> Seolfar cláirseach nua leis an gcláirseoir aitheanta, Úna Ní Fhlannagáin<b> Aonach an Oireachtais, Halla 1, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >16:00 <i>CRUINNIÚ CHINN BHLIANA AerachAiteachGaelach</i> Comharghrúpa ealaíon LADTAIÉ+ <b> Svuít Bhaile Átha Cliath, Leibhéal 1, Óstán Europa</b></label><br>
-<label><input type="checkbox" name="item" >16:30 - 19:30 <i>PODCHRAOLADH BEO</i> le foireann podchraoltaí Seachtain <b> Mol na Meán, Halla 1, Leibhéal 1, ICC</b></label><br>
-<label><input type="checkbox" name="item" >16:30 <i> SEOLADH FEACHTAS NÁISIÚNTA </i> ó AMLÉ agus ó léachtóirí ar son GaelOllscolaíocht <b> Seomra Cruinnithe 2, Leibhéal 3, ICC </b></label><br>
-<label><input type="checkbox" name="item" >17:00 <i>CLUB NA FÉILE NA nÓG </i> Seisiún siamsaíochta do na hiomaitheoirí óga agus dá gcairde.  <b> Halla 2B, Leibhéal 1, ICC </b></label><br>
-<label><input type="checkbox" name="item" >17:00 <i>LÉACHT: CÉ AS A dTÁINIG AN SEAN-NÓS</i> agus an ceangail atá aige le traidisiún cláirseoireachta na nGael. <b> An Stiúideo, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >17:00 <i>COMHDHÁIL NA nGAEL - TIONSCADAL CHOLMCILLE</i> Aoichainteoirí as Albain agus Manainn ag plé a gcuid eispéaras <b> An Bálseomra, Leibhéal 1, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >17:00 <i>LÉAMH DRÁMA</i> OCRAS <b> Barr an Tí, 12ú Urlár, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >18:00 <i>MÓRSHEOLADH LEABHAR</i>Seolfar leabhair nua thaighde agus liteartha <b> Dánlann Dillon, An Chultúrlann, Bóthar na bhFál</b></label><br>
-<label><input type="checkbox" name="item" >19:00 <i>CORN UÍ RIADA</i> Príomhchomórtas Amhránaíochta ar an Sean-Nós, Beo ar RTÉ Raidió na Gaeltachta agus www.tg4.ie <b> An Halla Mór, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >20:00 <i>DRÁMA SA DORCHADHAS</i> 'An Eachtra', dráma bleachtaireachta ó pheann Nuala Ní Néill.  <b> An Stiúideo, Bunurlár, ICC </b></label><br>
-<label><input type="checkbox" name="item" >21:00 <i>AN QUEERCAL COMHRÁ</i> Grúpa sóisialta le haghaidh cainteoirí Gaeilge LADTAIÉ+<b> An Leabharlann, Leibhéal 1, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >22:00 <i>GAELGÁIRÍ</i> Club grinn Gaeilge  <b> An Bálseomra (Cuid 4-5), Leibhéal 1, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >22:30 <i>CLUB AMHRÁNAÍOCHTA</i> ‘Casadh an tSúgáin’ <b> An Bálseomra, Leibhéal 1, Óstán Europa </b></label><br>
-<label><input type="checkbox" name="item" >22:30 <i>CLUB NA FÉILE</i> Ceol ó Seán Mac Corraidh agus The Hot Whiskeys <b> An Bálseomra, Bunurlár, Óstán Europa</b></label><br>
-<label><input type="checkbox" name="item" >22:30 - 01:00 <i>CLUB NA FÉILE</i> Ceol ó Pólca 4 <b> Halla Uladh</b></label><br>
-
-
-    <br>
-    <button type="button" onclick="showSelected()">Cruthaigh an liosta</button>
+    <h3>Déardaoin</h3>
+    <label><input type="checkbox" name="item"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A</b></label>
+    <label><input type="checkbox" name="item"> 11:00 <i>AGALLAMH BEIRTE (B)</i> Iomaitheoirí idir 9-11 <b>Halla 2A</b></label>
+    <label><input type="checkbox" name="item"> 12:30 <i>VEIDHLÍN (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 3</b></label>
   </form>
 
-  <div id="output">
-    <h3>✅ Imeachtaí roghnaithe agat:</h3>
-    <ul id="selectedList"></ul>
-    <button onclick="window.print()">🖨️ Priontáil</button>
+  <br>
+  <button onclick="generateOutput()">Cruthaigh achoimre</button>
+
+  <!-- Output Section -->
+  <div id="output" class="hidden">
+    <h2>Imeachtaí roghnaithe agat</h2>
+    <table id="outputTable">
+      <thead>
+        <tr>
+          <th>Am</th>
+          <th>Teideal</th>
+          <th>Suíomh</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
 
   <script>
-    function showSelected() {
-      const checkedItems = document.querySelectorAll('input[name="item"]:checked');
-      const list = document.getElementById("selectedList");
-      list.innerHTML = '';
+    function generateOutput() {
+      const output = document.getElementById('output');
+      const outputTableBody = document.querySelector('#outputTable tbody');
+      const checkboxes = document.querySelectorAll('#checklistForm input[type="checkbox"]');
+      outputTableBody.innerHTML = '';
+      let anySelected = false;
 
-      checkedItems.forEach(item => {
-        const label = item.parentElement;
-        const labelCopy = label.cloneNode(true);
-        labelCopy.querySelector('input').remove();
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          const label = checkbox.parentElement;
+          const html = label.innerHTML;
 
-        const li = document.createElement("li");
-        li.innerHTML = labelCopy.innerHTML.trim();
-        list.appendChild(li);
+          // Extract parts: time, title (italic), location (bold)
+          const timeMatch = html.match(/^\s*\d{1,2}:\d{2}/);
+          const titleMatch = html.match(/<i>(.*?)<\/i>/);
+          const locationMatch = html.match(/<b>(.*?)<\/b>/);
+
+          const time = timeMatch ? timeMatch[0].trim() : '';
+          const title = titleMatch ? titleMatch[1] : '';
+          const location = locationMatch ? locationMatch[1] : '';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${time}</td>
+            <td>${title}</td>
+            <td>${location}</td>
+          `;
+          outputTableBody.appendChild(tr);
+          anySelected = true;
+        }
       });
 
-      document.getElementById("output").style.display = "block";
+      if (anySelected) {
+        output.classList.remove('hidden');
+      } else {
+        output.classList.add('hidden');
+      }
     }
   </script>
 
