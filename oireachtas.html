@@ -42,7 +42,6 @@
       text-align: left;
     }
 
-    /* Hide the 'Imeachtaí roghnaithe agat' section unless something is selected */
     #output.hidden {
       display: none;
     }
@@ -58,12 +57,12 @@
       }
 
       body * {
-        display: none;
+        display: none !important;
       }
 
       #output, #output * {
-        display: block;
-        visibility: visible;
+        display: block !important;
+        visibility: visible !important;
       }
 
       #output {
@@ -73,14 +72,6 @@
         box-sizing: border-box;
         background: none;
       }
-
-      #output button {
-        display: none;
-      }
-
-      .no-print {
-        display: none !important;
-      }
     }
   </style>
 </head>
@@ -88,7 +79,6 @@
 
   <h2>Roghnaigh d'imeachtaí</h2>
 
-  <!-- Event Form -->
   <form id="checklistForm">
     <h3>Dé Céadaoin</h3>
     <label><input type="checkbox" name="item"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
@@ -104,7 +94,6 @@
   <br>
   <button onclick="generateOutput()">Cruthaigh achoimre</button>
 
-  <!-- Output Section -->
   <div id="output" class="hidden">
     <h2>Imeachtaí roghnaithe agat</h2>
     <table id="outputTable">
@@ -124,30 +113,38 @@
       const output = document.getElementById('output');
       const outputTableBody = document.querySelector('#outputTable tbody');
       const checkboxes = document.querySelectorAll('#checklistForm input[type="checkbox"]');
+
       outputTableBody.innerHTML = '';
       let anySelected = false;
 
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
           const label = checkbox.parentElement;
-          const html = label.innerHTML;
 
-          // Extract parts: time, title (italic), location (bold)
+          // Clone the label and remove input to get clean content
+          const clone = label.cloneNode(true);
+          clone.querySelector('input').remove();
+          const html = clone.innerHTML.trim();
+
+          // Extract time
           const timeMatch = html.match(/^\s*\d{1,2}:\d{2}/);
-          const titleMatch = html.match(/<i>(.*?)<\/i>/);
-          const locationMatch = html.match(/<b>(.*?)<\/b>/);
-
           const time = timeMatch ? timeMatch[0].trim() : '';
+
+          // Extract <i> content for title
+          const titleMatch = html.match(/<i>(.*?)<\/i>/);
           const title = titleMatch ? titleMatch[1] : '';
+
+          // Extract <b> content for location
+          const locationMatch = html.match(/<b>(.*?)<\/b>/);
           const location = locationMatch ? locationMatch[1] : '';
 
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
+          const row = document.createElement('tr');
+          row.innerHTML = `
             <td>${time}</td>
-            <td>${title}</td>
-            <td>${location}</td>
+            <td><i>${title}</i></td>
+            <td><b>${location}</b></td>
           `;
-          outputTableBody.appendChild(tr);
+          outputTableBody.appendChild(row);
           anySelected = true;
         }
       });
