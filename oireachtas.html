@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: sans-serif;
-      max-width: 1200px;
+      max-width: none;
       margin: auto;
       padding: 2rem;
     }
@@ -19,6 +19,9 @@
     #output {
       display: none;
       margin-top: 2rem;
+      width: 100%
+      font-size: 10pt;
+      line-height: 1.2;
     }
 
     table {
@@ -80,21 +83,10 @@
         background: white;
       }
 
-      #printButton {
+      #printButton, pdfButton, h2 {
         display: none !important;
       }
-
-      #pdfButton {
-        margin-top: 1rem;
-        display: none;
-      }
-
-      #output {
-  max-width: 100%;
-  font-size: 10pt;
-  line-height: 1.2;
-}
-
+      
 #summaryTable th,
 #summaryTable td {
   padding: 4px 6px;
