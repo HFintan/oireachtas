@@ -325,8 +325,8 @@
     </table>
   </div>
 
-  <button id="printButton" onclick="window.print()">Priontáil</button>
-  <button id="pdfButton" onclick="exportToPDF()">Íoslódáil mar PDF</button>
+  <button id="printButton" onclick="window.print()" style="display: none;">Priontáil</button>
+  <button id="pdfButton" onclick="exportToPDF()" style="display: none;">Íoslódáil mar PDF</button>
   <script>
     function generateSummary() {
       const checkboxes = document.querySelectorAll('input[name="item"]:checked');
@@ -388,19 +388,19 @@
     }
 
     // Use html2canvas to render the visible part of the summary
-    const canvas = await html2canvas(element);
+    const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdf = new jsPDF('landscape', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
 
     const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pageWidth;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const imgWidth = pageWidth;
+    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
     pdf.save("mo-imeachtaí.pdf");
   }
 </script>
