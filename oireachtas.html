@@ -305,7 +305,7 @@
   </div>
 
   <button id="printButton" onclick="window.print()">Priontáil</button>
-
+  <button id="pdfButton" onclick="exportToPDF()">Íoslódáil mar PDF</button>
   <script>
     function generateSummary() {
       const checkboxes = document.querySelectorAll('input[name="item"]:checked');
@@ -354,5 +354,35 @@
       document.getElementById('printButton').style.display = 'inline-block';
     }
   </script>
+  <script>
+  async function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById("output");
+
+    // Ensure summary is visible
+    if (element.style.display === "none") {
+      alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
+      return;
+    }
+
+    // Use html2canvas to render the visible part of the summary
+    const canvas = await html2canvas(element);
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pageWidth;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save("mo-imeachtaí.pdf");
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
