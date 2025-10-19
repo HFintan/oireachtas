@@ -28,6 +28,11 @@
       border-radius: 8px;
     }
 
+    #printButton {
+      display: none;
+      margin-top: 1rem;
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
@@ -48,10 +53,6 @@
       background: #eee;
       font-weight: bold;
       text-align: center;
-    }
-
-    .button-row {
-      margin-top: 1rem;
     }
 
     /* Print Styles */
@@ -108,11 +109,10 @@
 
   <div class="button-row">
     <button onclick="generateOutput()">Cruthaigh Achoimre</button>
-    <button onclick="window.print()">Priontáil PDF</button>
+    <button id="printButton" onclick="window.print()">Priontáil PDF</button>
   </div>
 
   <div id="output">
-    <h2>Imeachtaí roghnaithe agat</h2>
     <table id="outputTable">
       <thead>
         <tr>
@@ -131,9 +131,11 @@
       const output = document.getElementById('output');
       const outputTableBody = document.querySelector('#outputTable tbody');
       const checkboxes = document.querySelectorAll('#checklistForm input[type="checkbox"]');
+      const printButton = document.getElementById('printButton');
 
       outputTableBody.innerHTML = '';
       output.style.display = 'none';
+      printButton.style.display = 'none';
 
       let currentDay = '';
       let anySelected = false;
@@ -178,6 +180,7 @@
 
       if (anySelected) {
         output.style.display = 'block';
+        printButton.style.display = 'inline-block';
       } else {
         alert("Níor roghnaíodh aon imeachtaí.");
       }
