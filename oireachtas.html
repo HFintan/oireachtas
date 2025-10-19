@@ -40,11 +40,13 @@
     th, td {
       padding: 0.5rem;
       text-align: left;
+      vertical-align: top;
     }
 
     .day-heading {
       background: #eee;
       font-weight: bold;
+      text-align: center;
     }
 
     /* Print Styles */
@@ -83,7 +85,7 @@
   <form id="checklistForm">
     <h3>Dé Céadaoin</h3>
     <label><input type="checkbox"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór</b></label>
-    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL</i> <b>ICC</b></label>
+    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL</i> Cainteanna agus ceol ó ghrúpaí áitiúla <b>ICC</b></label>
 
     <h3>Déardaoin</h3>
     <label><input type="checkbox"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A</b></label>
@@ -101,6 +103,7 @@
         <tr>
           <th>Am</th>
           <th>Teideal</th>
+          <th>Cur Síos</th>
           <th>Suíomh</th>
         </tr>
       </thead>
@@ -123,32 +126,42 @@
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
           anySelected = true;
-          // Get the parent label and heading
           const label = checkbox.closest('label');
           const dayHeading = getPreviousHeading(label);
 
-          // Extract time
-          const labelText = label.innerText.trim();
-          const timeMatch = labelText.match(/^\d{1,2}:\d{2}/);
+          // Extract full text
+          const fullText = label.innerText.trim();
+
+          // Extract time (starts the label)
+          const timeMatch = fullText.match(/^\d{1,2}:\d{2}/);
           const time = timeMatch ? timeMatch[0] : '';
 
-          // Extract title and location
-          const title = label.querySelector('i')?.innerHTML || '';
-          const location = label.querySelector('b')?.innerHTML || '';
+          // Extract title from <i>, location from <b>
+          const title = label.querySelector('i')?.innerText || '';
+          const location = label.querySelector('b')?.innerText || '';
 
-          // Insert a new row for the day if it's changed
+          // Get the description (text between </i> and <b>)
+          let description = '';
+          const html = label.innerHTML;
+          const descMatch = html.match(/<\/i>(.*?)<b>/);
+          if (descMatch && descMatch[1]) {
+            description = descMatch[1].replace(/<[^>]*>/g, '').trim();
+          }
+
+          // Insert new day row if needed
           if (dayHeading && dayHeading !== currentDay) {
             const dayRow = document.createElement('tr');
-            dayRow.innerHTML = `<td colspan="3" class="day-heading">${dayHeading}</td>`;
+            dayRow.innerHTML = `<td colspan="4" class="day-heading">${dayHeading}</td>`;
             outputTableBody.appendChild(dayRow);
             currentDay = dayHeading;
           }
 
-          // Add event row
+          // Create the table row
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${time}</td>
             <td><i>${title}</i></td>
+            <td>${description}</td>
             <td><b>${location}</b></td>
           `;
           outputTableBody.appendChild(row);
