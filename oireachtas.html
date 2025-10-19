@@ -31,6 +31,7 @@
     table {
       border-collapse: collapse;
       width: 100%;
+      font-size: 10pt;
     }
 
     table, th, td {
@@ -38,7 +39,7 @@
     }
 
     th, td {
-      padding: 0.5rem;
+      padding: 0.3rem;
       text-align: left;
       vertical-align: top;
     }
@@ -49,8 +50,17 @@
       text-align: center;
     }
 
+    .button-row {
+      margin-top: 1rem;
+    }
+
     /* Print Styles */
     @media print {
+      @page {
+        size: A4;
+        margin: 0.5cm;
+      }
+
       body, html {
         margin: 0;
         padding: 0;
@@ -68,11 +78,14 @@
         visibility: visible !important;
       }
 
+      #output h2 {
+        display: none !important;
+      }
+
       #output {
         position: static;
         width: 100%;
-        padding: 0.5cm;
-        box-sizing: border-box;
+        padding: 0;
         background: none;
       }
     }
@@ -93,8 +106,10 @@
     <label><input type="checkbox"> 12:30 <i>VEIDHLÍN (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 3</b></label>
   </form>
 
-  <br>
-  <button onclick="generateOutput()">Cruthaigh achoimre</button>
+  <div class="button-row">
+    <button onclick="generateOutput()">Cruthaigh Achoimre</button>
+    <button onclick="window.print()">Priontáil PDF</button>
+  </div>
 
   <div id="output">
     <h2>Imeachtaí roghnaithe agat</h2>
@@ -129,18 +144,13 @@
           const label = checkbox.closest('label');
           const dayHeading = getPreviousHeading(label);
 
-          // Extract full text
           const fullText = label.innerText.trim();
-
-          // Extract time (starts the label)
           const timeMatch = fullText.match(/^\d{1,2}:\d{2}/);
           const time = timeMatch ? timeMatch[0] : '';
 
-          // Extract title from <i>, location from <b>
           const title = label.querySelector('i')?.innerText || '';
           const location = label.querySelector('b')?.innerText || '';
 
-          // Get the description (text between </i> and <b>)
           let description = '';
           const html = label.innerHTML;
           const descMatch = html.match(/<\/i>(.*?)<b>/);
@@ -148,7 +158,6 @@
             description = descMatch[1].replace(/<[^>]*>/g, '').trim();
           }
 
-          // Insert new day row if needed
           if (dayHeading && dayHeading !== currentDay) {
             const dayRow = document.createElement('tr');
             dayRow.innerHTML = `<td colspan="4" class="day-heading">${dayHeading}</td>`;
@@ -156,7 +165,6 @@
             currentDay = dayHeading;
           }
 
-          // Create the table row
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${time}</td>
@@ -175,7 +183,6 @@
       }
     }
 
-    // Helper to find the previous <h3> (the day header)
     function getPreviousHeading(element) {
       let prev = element.previousElementSibling;
       while (prev) {
