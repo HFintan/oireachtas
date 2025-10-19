@@ -42,8 +42,9 @@
       text-align: left;
     }
 
-    #output.hidden {
-      display: none;
+    .day-heading {
+      background: #eee;
+      font-weight: bold;
     }
 
     /* Print Styles */
@@ -81,9 +82,8 @@
 
   <form id="checklistForm">
     <h3>Dé Céadaoin</h3>
-    <label><input type="checkbox"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
-    <label><input type="checkbox"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
-    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL NA FÉILE</i> <b>ICC</b></label>
+    <label><input type="checkbox"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór</b></label>
+    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL</i> <b>ICC</b></label>
 
     <h3>Déardaoin</h3>
     <label><input type="checkbox"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A</b></label>
@@ -94,7 +94,7 @@
   <br>
   <button onclick="generateOutput()">Cruthaigh achoimre</button>
 
-  <div id="output" class="hidden">
+  <div id="output">
     <h2>Imeachtaí roghnaithe agat</h2>
     <table id="outputTable">
       <thead>
@@ -115,31 +115,36 @@
       const checkboxes = document.querySelectorAll('#checklistForm input[type="checkbox"]');
 
       outputTableBody.innerHTML = '';
+      output.style.display = 'none';
+
+      let currentDay = '';
       let anySelected = false;
 
       checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-          const label = checkbox.parentElement;
-          const nodes = Array.from(label.childNodes).filter(n => n.nodeType !== 1 || n.tagName !== 'INPUT');
+          anySelected = true;
+          // Get the parent label and heading
+          const label = checkbox.closest('label');
+          const dayHeading = getPreviousHeading(label);
 
-          // Extract time from text node
-          let time = '';
-          let title = '';
-          let location = '';
+          // Extract time
+          const labelText = label.innerText.trim();
+          const timeMatch = labelText.match(/^\d{1,2}:\d{2}/);
+          const time = timeMatch ? timeMatch[0] : '';
 
-          nodes.forEach(node => {
-            if (node.nodeType === Node.TEXT_NODE && node.textContent.match(/^\s*\d{1,2}:\d{2}/)) {
-              time = node.textContent.trim().split(' ')[0];
-            }
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              if (node.tagName === 'I') {
-                title = node.innerHTML;
-              } else if (node.tagName === 'B') {
-                location = node.innerHTML;
-              }
-            }
-          });
+          // Extract title and location
+          const title = label.querySelector('i')?.innerHTML || '';
+          const location = label.querySelector('b')?.innerHTML || '';
 
+          // Insert a new row for the day if it's changed
+          if (dayHeading && dayHeading !== currentDay) {
+            const dayRow = document.createElement('tr');
+            dayRow.innerHTML = `<td colspan="3" class="day-heading">${dayHeading}</td>`;
+            outputTableBody.appendChild(dayRow);
+            currentDay = dayHeading;
+          }
+
+          // Add event row
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${time}</td>
@@ -147,11 +152,26 @@
             <td><b>${location}</b></td>
           `;
           outputTableBody.appendChild(row);
-          anySelected = true;
         }
       });
 
-      output.classList.toggle('hidden', !anySelected);
+      if (anySelected) {
+        output.style.display = 'block';
+      } else {
+        alert("Níor roghnaíodh aon imeachtaí.");
+      }
+    }
+
+    // Helper to find the previous <h3> (the day header)
+    function getPreviousHeading(element) {
+      let prev = element.previousElementSibling;
+      while (prev) {
+        if (prev.tagName === 'H3') {
+          return prev.textContent;
+        }
+        prev = prev.previousElementSibling;
+      }
+      return '';
     }
   </script>
 
