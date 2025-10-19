@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ga">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Roghnaigh d'Imeachtaí</title>
   <style>
     body {
@@ -16,78 +16,76 @@
       margin: 0.5rem 0;
     }
 
-    h3 {
-      margin-top: 2rem;
-    }
-
     #output {
       display: none;
       margin-top: 2rem;
-      background: #f9f9f9;
-      padding: 1rem;
-      border-radius: 8px;
-    }
-
-    #printButton {
-      display: none;
-      margin-top: 1rem;
     }
 
     table {
-      border-collapse: collapse;
       width: 100%;
-      font-size: 10pt;
-    }
-
-    table, th, td {
-      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: white;
     }
 
     th, td {
-      padding: 0.3rem;
+      border: 1px solid #ccc;
+      padding: 0.5rem;
       text-align: left;
       vertical-align: top;
     }
 
-    .day-heading {
+    th {
       background: #eee;
+    }
+
+    .day-heading {
+      margin-top: 2rem;
+      font-size: 1.2em;
       font-weight: bold;
-      text-align: center;
+    }
+
+    #printButton {
+      margin-top: 1rem;
+      display: none;
     }
 
     /* Print Styles */
     @media print {
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-size: 10pt;
+        font-family: "Arial", sans-serif;
+      }
+
       @page {
         size: A4 landscape;
         margin: 0.5cm;
       }
 
-      body, html {
-        margin: 0;
-        padding: 0;
-        font-size: 10pt;
-        font-family: "Arial Narrow", sans-serif;
-        line-height: 1.3;
-      }
-
       body * {
-        display: none !important;
+        visibility: hidden;
       }
 
       #output, #output * {
-        display: block !important;
-        visibility: visible !important;
-      }
-
-      #output h2 {
-        display: none !important;
+        visibility: visible;
       }
 
       #output {
-        position: static;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        padding: 0;
-        background: none;
+        background: white;
+      }
+
+      #printButton {
+        display: none !important;
+      }
+
+      h2 {
+        display: none;
       }
     }
   </style>
@@ -97,24 +95,18 @@
   <h2>Roghnaigh d'imeachtaí</h2>
 
   <form id="checklistForm">
-    <h3>Dé Céadaoin</h3>
-    <label><input type="checkbox"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór</b></label>
-    <label><input type="checkbox"> 13:00 <i>OSCAILT OIFIGIÚIL</i> Cainteanna agus ceol ó ghrúpaí áitiúla <b>ICC</b></label>
+    <label><input type="checkbox" name="item" value="Dé Céadaoin||11:00||COMÓRTAS NA gCÓR||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC"> 11:00 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
+    <label><input type="checkbox" name="item" value="Dé Céadaoin||12:30||COMÓRTAS NA gCÓR||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC"> 12:30 <i>COMÓRTAS NA gCÓR</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label>
 
-    <h3>Déardaoin</h3>
-    <label><input type="checkbox"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6‑9 <b>Halla 2A</b></label>
-    <label><input type="checkbox"> 11:00 <i>AGALLAMH BEIRTE (B)</i> Iomaitheoirí idir 9‑11 <b>Halla 2A</b></label>
-    <label><input type="checkbox"> 12:30 <i>VEIDHLÍN (C)</i> Iomaitheoirí idir 14‑17 <b>Seomra Cruinnithe 3</b></label>
+    <div class="day-heading">Déardaoin</div>
+    <label><input type="checkbox" name="item" value="Déardaoin||10:00||AGALLAMH BEIRTE (A)||Iomaitheoirí idir 6-9||Halla 2A, Leibhéal 1, ICC"> 10:00 <i>AGALLAMH BEIRTE (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A, Leibhéal 1, ICC</b></label>
+    <label><input type="checkbox" name="item" value="Déardaoin||10:30||SCÉALAÍOCHT (A)||Iomaitheoirí idir 7-9||Seomra Cruinnithe 1, Leibhéal 3, ICC"> 10:30 <i>SCÉALAÍOCHT (A)</i> Iomaitheoirí idir 7-9 <b>Seomra Cruinnithe 1, Leibhéal 3, ICC</b></label>
   </form>
 
-  <div class="button-row">
-    <button onclick="generateOutput()">Cruthaigh Achoimre</button>
-    <button id="printButton" onclick="window.print()">Priontáil PDF</button>
-  </div>
+  <button onclick="generateSummary()">Cruthaigh Achoimre</button>
 
   <div id="output">
-    <h2>Imeachtaí roghnaithe agat</h2>
-    <table id="outputTable">
+    <table id="summaryTable">
       <thead>
         <tr>
           <th>Am</th>
@@ -127,77 +119,55 @@
     </table>
   </div>
 
+  <button id="printButton" onclick="window.print()">Priontáil</button>
+
   <script>
-    function generateOutput() {
-      const output = document.getElementById('output');
-      const outputTableBody = document.querySelector('#outputTable tbody');
-      const checkboxes = document.querySelectorAll('#checklistForm input[type="checkbox"]');
-      const printButton = document.getElementById('printButton');
+    function generateSummary() {
+      const checkboxes = document.querySelectorAll('input[name="item"]:checked');
+      const tbody = document.querySelector("#summaryTable tbody");
+      tbody.innerHTML = '';
 
-      outputTableBody.innerHTML = '';
-      output.style.display = 'none';
-      printButton.style.display = 'none';
+      if (checkboxes.length === 0) {
+        alert('Roghnaigh imeachtaí ar dtús.');
+        return;
+      }
 
-      let currentDay = '';
-      let anySelected = false;
+      const eventsByDay = {};
 
       checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-          anySelected = true;
-          const label = checkbox.closest('label');
-          const dayHeading = getPreviousHeading(label);
+        const [day, time, title, description, location] = checkbox.value.split("||");
 
-          const fullText = label.innerText.trim();
-          const timeMatch = fullText.match(/^\d{1,2}:\d{2}/);
-          const time = timeMatch ? timeMatch[0] : '';
-
-          const title = label.querySelector('i')?.innerText || '';
-          const location = label.querySelector('b')?.innerText || '';
-
-          let description = '';
-          const html = label.innerHTML;
-          const descMatch = html.match(/<\/i>(.*?)<b>/);
-          if (descMatch && descMatch[1]) {
-            description = descMatch[1].replace(/<[^>]*>/g, '').trim();
-          }
-
-          if (dayHeading && dayHeading !== currentDay) {
-            const dayRow = document.createElement('tr');
-            dayRow.innerHTML = `<td colspan="4" class="day-heading">${dayHeading}</td>`;
-            outputTableBody.appendChild(dayRow);
-            currentDay = dayHeading;
-          }
-
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${time}</td>
-            <td><i>${title}</i></td>
-            <td>${description}</td>
-            <td><b>${location}</b></td>
-          `;
-          outputTableBody.appendChild(row);
+        if (!eventsByDay[day]) {
+          eventsByDay[day] = [];
         }
+
+        eventsByDay[day].push({ time, title, description, location });
       });
 
-      if (anySelected) {
-        output.style.display = 'block';
-        printButton.style.display = 'inline‑block';
-      } else {
-        alert("Níor roghnaíodh aon imeachtaí.");
-      }
-    }
+      for (const day of Object.keys(eventsByDay)) {
+        const row = document.createElement("tr");
+        const th = document.createElement("th");
+        th.textContent = day;
+        th.colSpan = 4;
+        th.style.background = '#ddd';
+        row.appendChild(th);
+        tbody.appendChild(row);
 
-    function getPreviousHeading(element) {
-      let prev = element.previousElementSibling;
-      while (prev) {
-        if (prev.tagName === 'H3') {
-          return prev.textContent;
-        }
-        prev = prev.previousElementSibling;
+        eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time)).forEach(event => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${event.time}</td>
+            <td><i>${event.title}</i></td>
+            <td>${event.description}</td>
+            <td><b>${event.location}</b></td>
+          `;
+          tbody.appendChild(row);
+        });
       }
-      return '';
+
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('printButton').style.display = 'inline-block';
     }
   </script>
-
 </body>
 </html>
