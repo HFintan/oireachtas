@@ -63,8 +63,8 @@
       }
 
       @page {
-      //  size: A4 landscape;
-        size: A4 portrait;
+        size: A4 landscape;
+      //  size: A4 portrait;
         margin: 0.5cm;
       }
 
@@ -91,7 +91,7 @@
 #summaryTable th,
 #summaryTable td {
   padding: 4px 6px;
-  font-size: 10pt;
+  font-size: 12pt;
 }
 
 @media screen and (min-width: 800px) {
@@ -327,7 +327,7 @@
   </div>
 
   <button id="printButton" onclick="window.print()" style="display: none;">Priontáil</button>
-  <button id="pdfButton" onclick="exportToPDF()">Íoslódáil mar PDF</button>
+  <button id="pdfButton" onclick="exportToPDF()" style="display: none;">Íoslódáil mar PDF</button>
   <script>
     function generateSummary() {
       const checkboxes = document.querySelectorAll('input[name="item"]:checked');
