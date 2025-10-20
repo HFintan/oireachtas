@@ -389,55 +389,62 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
   <script>
     
 function exportToPDF() {
+ 
+function exportToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
 
-  const outputElement = document.getElementById("output");
-  if (outputElement.style.display === "none") {
-    alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
+  const checkedInputs = document.querySelectorAll('input[name="item"]:checked');
+
+  if (checkedInputs.length === 0) {
+    alert("Roghnaigh imeachtaí le haghaidh do PDF.");
     return;
   }
 
-// Prepare table rows from HTML
-  const rows = [];
-  const tableRows = outputElement.querySelectorAll("tbody tr");
+  const eventsByDay = {};
 
-  const eventsByDat={};
-  
-  tableRows.forEach((tr) => {
-    const cells = tr.querySelectorAll("td");
-    if (cells.length!== 4) return;
-    
-const fullTime = cells[0].textContent.trim(); // e.g. "Dé Céadaoin||11:00"
-    const [day, time] = fullTime.split("||");
-    const title = cells[1].textContent.trim();
-    const description = cells[2].textContent.trim();
-    const location = cells[3].textContent.trim();
+  // Group checked events by day
+  checkedInputs.forEach((input) => {
+    const [day, time, title, description, location] = input.value.split("||");
 
     if (!eventsByDay[day]) {
       eventsByDay[day] = [];
     }
 
-    eventsByDay[day].push({ time, title, description, location });
+    eventsByDay[day].push({
+      time,
+      title,
+      description,
+      location,
+    });
   });
 
-  // Build final row list with day headers
+  // Sort each day's events by time
+  Object.keys(eventsByDay).forEach((day) => {
+    eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time));
+  });
+
+  const rows = [];
+
+  // Build PDF rows with section headers
   for (const day in eventsByDay) {
+    // Day heading row
     rows.push([
       {
         content: day,
         colSpan: 4,
         styles: {
-          halign: "center",
           fontStyle: "bold",
+          halign: "center",
           fillColor: [240, 240, 240],
         },
       },
     ]);
 
-    eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time)).forEach((event) => {
+    // Event rows
+    eventsByDay[day].forEach((event) => {
       rows.push([
-        `${event.time}`,
+        event.time,
         event.title,
         event.description,
         event.location,
@@ -445,7 +452,7 @@ const fullTime = cells[0].textContent.trim(); // e.g. "Dé Céadaoin||11:00"
     });
   }
 
-  // Generate PDF
+  // Generate the PDF
   pdf.autoTable({
     startY: 20,
     head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
