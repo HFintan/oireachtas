@@ -411,7 +411,7 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
 
     const imgProps = pdf.getImageProperties(imgData);
     const pdfWidth = pageWidth;
-    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
     // FH NEW - adding this to try allow multiple pages
     
@@ -426,13 +426,15 @@ for (let i = 0; i < totalPages; i++) {
   canvasPage.height = pageHeightPx;
 
   const ctx = canvasPage.getContext("2d");
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0,0,canvasPage.width, canvasPage.height);
   ctx.drawImage(canvas, 0, -sourceY);
 
   const imgDataPage = canvasPage.toDataURL("image/png");
   const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
 
   if (i > 0) pdf.addPage();
-  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
+  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, pageHeight);
   }    
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
     // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
