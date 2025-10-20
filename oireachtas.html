@@ -431,7 +431,7 @@ for (let i = 0; i < totalPages; i++) {
   ctx.drawImage(canvas, 0, -sourceY);
 
   const imgDataPage = canvasPage.toDataURL("image/png");
-  const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
+  // const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
 
   if (i > 0) pdf.addPage();
   pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, pageHeight);
