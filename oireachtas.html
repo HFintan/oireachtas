@@ -434,7 +434,7 @@ for (let i = 0; i < totalPages; i++) {
   
   if (i > 0) pdf.addPage();
   const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
-  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, pageHeight);
+  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
   }    
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
     // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
