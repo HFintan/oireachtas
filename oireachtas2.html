@@ -390,30 +390,55 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
     }
   </script>
   <script>
-    function exportToPDF() {
+    
+function exportToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
-  const outputElement = document.getElementById("output");
 
+  const outputElement = document.getElementById("output");
   if (outputElement.style.display === "none") {
     alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
     return;
+    
+// Prepare table rows from HTML
+  const rows = [];
+  const tableRows = outputElement.querySelectorAll("tbody tr");
+
+  tableRows.forEach((tr) => {
+    const cells = tr.querySelectorAll("td, th");
+    const row = [];
+    cells.forEach((cell) => row.push(cell.innerText.trim()));
+    rows.push(row);
+  });
+
+  // Split data into chunks of 60 rows
+  const rowsPerPage = 60;
+  let startY = 20;
+
+  for (let i = 0; i < rows.length; i += rowsPerPage) {
+    const chunk = rows.slice(i, i + rowsPerPage);
+
+    pdf.autoTable({
+      startY: startY,
+      head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
+      body: chunk,
+      margin: { top: 10, left: 10, right: 10 },
+      styles: {
+        fontSize: 10,
+        cellPadding: 3,
+      }
+    });
+
+    if (i + rowsPerPage < rows.length) {
+      pdf.addPage();
+    }
   }
 
-  pdf.html(outputElement, {
-    callback: function (pdf) {
-      pdf.save("mo-imeachtaí.pdf");
-    },
-    margin: 10,
-    autoPaging: 'text',
-    html2canvas: { scale: 0.7 },
-    // width: pdf.internal.pageSize.getWidth()
-  });
-    // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
-    // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
-}
+  pdf.save("mo-imeachtaí.pdf");
+  }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </body>
 </html>
