@@ -404,7 +404,7 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
     const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
-    const { jsPDF } = window.jsdf; // FH NEW
+    // const { jsPDF } = window.jsdf; // FH NEW
     const pdf = new jsPDF('portrait', 'mm', 'a4'); 
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -429,10 +429,10 @@ for (let i = 0; i < totalPages; i++) {
   ctx.drawImage(canvas, 0, -sourceY);
 
   const imgDataPage = canvasPage.toDataURL("image/png");
-  const imgPageHeight = (canvasPage.height * imgWidth) / canvasPage.width;
+  const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
 
   if (i > 0) pdf.addPage();
-  pdf.addImage(imgDataPage, 'PNG', 0, 0, imgWidth, imgPageHeight);
+  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
     
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
     // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
