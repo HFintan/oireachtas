@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ga">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cruthaigh d'amchlár pearsanta le haghaidh Oireachtas '25</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: none;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0;
+    }
+
+    #output {
+      display: none;
+      margin-top: 2rem;
+      width: 100%;
+      font-size: 12pt;
+      line-height: 1.2;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    .day-heading {
+      margin-top: 2rem;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    #printButton {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* Print Styles */
+    @media print {
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-size: 12pt;
+        font-family: "Arial", sans-serif;
+      }
+
+      @page {
+        size: A4 landscape;
+      //  size: A4 portrait;
+        margin: 0.5cm;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      #output, #output * {
+        visibility: visible;
+      }
+
+      #output {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+      }
+
+      #printButton, pdfButton, h2 {
+        display: none !important;
+      }
+      
+#summaryTable th,
+#summaryTable td {
+  padding: 4px 6px;
+  font-size: 12pt;
+}
+
+@media screen and (min-width: 800px) {
+  #output {
+    transform: rotate(0deg); /* Could rotate if needed */
+    width: 100%;
+  }
+}
+
+      table {
+  width: 100%;
+}
+
+      
+      h2 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Cruthaigh d'amchlár pearsanta le haghaidh Oireachtas '25</h2>
+<p>Conas: (1) Cliceáil ar cibé imeachtaí a bhfuil spéis agat iontu.
+(2) Brú an cnaipe "Cruthaigh mo liosta". (3) Ansin <i>thíos</i> faoi sin, feicfidh
+tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PDF.</p>
+  <p>Ciallaíonn * in aice leis an t-am NACH gclúdaíonn Ollthicéad na féile an t-imeacht sin, agus 
+  caithfear clárú/ticéad a cheannach áit éigin eile.</p>
+  <p><b>Nóta:</b> Agus mé i mbun an leathanach seo a chruthú, bhí deacrachtaí agam
+  le leithead na gcolúin, so rinneadh mé neart eagarthóireachta/achoimriú/gearradh siar
+   ar sonraí éagsúla ionas go mbeadh spás agam imeacht ar bith a chur ar líne amháin. Mar a thárla ar dheireadh,
+  tháinig mé ar bhealach níos fearr chun rudaí a thaispeáint, agus b'fhéidir nach raibh an méid sin 
+  eagarthóireachta de dhíth i chuile chás. Má airíonn tú go bhfuil imeacht ar leith go bhfuil eagarthóireacht
+  maslach déanta agam air, fáilte romhat teachtaireacht a chur chugam le ceartúcháin.</p>
+
+
+  <form id="checklistForm">
+    
+    <div class="day-heading">Dé Céadaoin</div>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||11:00||Comórtas na gCór||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC"> 11:00 <i>Comórtas na gCór</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||12:30||Comórtas na gCór||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC"> 12:30 <i>Comórtas na gCór</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||13:00||Oscailt Oifigiúil na Féile|| ||ICC"> 13:00 <i>Oscailt Oifigiúil na Féile</i> <b>ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||14:30||Bronnadh Dhuaiseanna Liteartha || Duaiseanna Liteartha an Oireachtais||An Stiúideo, Bunurlár, ICC"> 14:30 <i>Bronnadh Dhuaiseanna</i> Duaiseanna Liteartha an Oireachtais <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||15:30||Ag Scríobh don Scáileán||Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta||An Stiúideo, Bunurlár, ICC"> 15:30 <i>Ag Scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||16:00||Nochtadh Pictiúr ||Nochtadh Pictiúr in Ómós Ghearóid Uí Chairealláin||Raidió Fáilte, 30 Sráid Dhubhaise"> 16:00 <i>Nochtadh Pictiúr</i> Nochtadh Pictiúr in Ómós Ghearóid Uí Chairealláin <b>Raidió Fáilte, 30 Sráid Dhubhaise, BT 12 4AL</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||18:30||Cáis, Ceol 's Ól||Díolta Amach||Áras Mhic Reachtain, Br. Aontroma"> 18:30 <i>Cáis, Ceol 's Ól</i> <b>Áras Mhic Reachtain, Br. Aontroma</b> <b>**Díolta Amach**</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||19:30||Fáiltiú na nGradam Cumarsáide||Fáiltiú Seaimpéin||Halla na Cathrach"> 19:30 <i>Fáiltiú na nGradam Cumarsáide</i> Fáiltiú Seaimpéin <b>Halla na Cathrach</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||20:00||Ócáid Bhronnta Ghradaim|| Gradaim Cumarsáide an Oireachtais - beo ar www.tg4.ie || Halla na Cathrach"> 20:00 <i>Ócáid Bhronnta Ghradaim</i>Gradaim Cumarsáide an Oireachtais - beo ar www.tg4.ie<b>Halla na Cathrach</b></label><br>
+    <div class="day-heading">Déardaoin</div>
+<label><input type="checkbox" name="item" value="Déardaoin||10:00||Agallamh Beirte (A)||Iomaitheoirí idir 6-9||Halla 2A, L.1, ICC"> 10:00 <i>Agallamh Beirte (A)</i> Iomaitheoirí idir 6-9 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||10:00||Agallamh Beirte (C)||Iomaitheoirí idir 11-13||Halla 2B, L.1, ICC"> 10:00 <i>Agallamh Beirte (C)</i> Iomaitheoirí idir 11-13 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||10:00||Aithriseoireacht (A)||Iomaitheoirí idir 3-5||Seomra Cruinnithe 2, L.3, ICC"> 10:00 <i>Aithriseoireacht (A)</i> Iomaitheoirí idir 3-5 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||10:00||An Seomra Teaghlach||ó 10:00-17:00||Arc, Bunurlár, ICC"> 10:00 <i>An Seomra Teaghlach</i> Ó 10:00-17:00 <b>Arc, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||10:30||Scéalaíocht (A)||Iomaitheoirí idir 7-9||Seomra Cruinnithe 1, L.3, ICC"> 10:30 <i>Scéalaíocht (A)</i> Iomaitheoirí idir 7-9 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||10:30||Veidhlín (A)||Iomaitheoirí idir 7-10||Seomra Cruinnithe 3, L.3, ICC"> 10:30 <i>Veidhlín (A)</i> Iomaitheoirí idir 7-10 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:00||Aithriseoireacht (B)||Iomaitheoirí idir 6-7||Seomra Cruinnithe 2, L.3, ICC"> 11:00 <i>Aithriseoireacht (B)</i> Iomaitheoirí idir 6-7 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:00||Agallamh Beirte (B) ||Iomaitheoirí idir 9-11||Halla 2A, L.1, ICC"> 11:00 <i>Agallamh Beirte (B)</i> Iomaitheoirí idir 9-11 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:00||Craoladh Beo 'Barrscéalta'||Beo ar RTÉ Raidió na Gaeltachta||Raidió Fáilte, 30 Sráid Dhubhaise"> 11:00 <i>Craoladh Beo 'Barrscéalta'</i> Beo ar RTÉ Raidió na Gaeltachta <b>Raidió Fáilte, 30 Sráid Dhubhaise</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:30||Scéalaíocht (B)||Iomaitheoirí idir 10-13||Seomra Cruinnithe 1, L.3, ICC"> 11:30 <i>Scéalaíocht (B)</i> Iomaitheoirí idir 10-13 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:30||Veidhlín (B) ||Iomaitheoirí idir 10-12||Seomra Cruinnithe 3, L.3, ICC"> 11:30 <i>Veidhlín (B) </i> Iomaitheoirí idir 10-12 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||11:30||Ainmniú Agus Comhroinnt Áiteanna||Caint ar ainmneacha logánta sa tuaisceart.||Dánlann Dillon, An Chultúrlann"> 11:30 <i>Ainmniú Agus Comhroinnt Áiteanna</i> Caint ar ainmneacha logánta sa tuaisceart. <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||12:00||Agallamh Beirte (D)||Iomaitheoirí idir 14-17||Halla 2B, L.1, ICC"> 12:00 <i>Agallamh Beirte (D)</i> Iomaitheoirí idir 14-17 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||12:15||Aithriseoireacht (C)||Iomaitheoirí idir 8-9||Seomra Cruinnithe 2, L.3, ICC"> 12:15 <i>Aithriseoireacht (C)</i> Iomaitheoirí idir 8-9 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||12:30||Veidhlín (C)||Iomaitheoirí idir 14-17||Seomra Cruinnithe 3, L.3, ICC"> 12:30 <i>Veidhlín (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||12:30||Scéalaíocht (C)||Iomaitheoirí idir 14-17||Seomra Cruinnithe 1, L.3, ICC"> 12:30 <i>Scéalaíocht (C)</i> Iomaitheoirí idir 14-17 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||13:00||Ceol Beirte (A)||Iomaitheoirí idir 7-10||Halla 2A, L.1, ICC"> 13:00 <i>Ceol Beirte (A)</i> Iomaitheoirí idir 7-10 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||13:00||Seoladh Oifigiúil||Seoladh ‘Aonach An Oireachtais’ le Ceol Ó Burnchurch||Halla 1, L.1, ICC"> 13:00 <i>Seoladh Oifigiúil</i>Seoladh ‘Aonach An Oireachtais’, le ceol Ó Burnchurch <b>Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||13:30||An Fheadóg Stáin (A)||Iomaitheoirí idir 7-9||Seomra Cruinnithe 3, L.3, ICC"> 13:30 <i>An Fheadóg Stáin (A)</i> Iomaitheoirí idir 7-9 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||13:30||Aithriseoireacht (D)||Iomaitheoirí idir 10-11||Seomra Cruinnithe 2, L.3, ICC"> 13:30 <i>Aithriseoireacht (D)</i> Iomaitheoirí idir 10-11 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||13:45||Ceol Beirte (B)||Iomaitheoirí idir 11-12||Halla 2A, L.1, ICC"> 13:45 <i>Ceol Beirte (B)</i> Iomaitheoirí idir 11-12 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:00||Agallamh Beirte|| Comórtas do dhaoine fásta, beo ar www.tg4.ie||An Stiúideo, Bunurlár, ICC"> 14:00 <i>Agallamh Beirte</i> Comórtas do dhaoine fásta, beo ar www.tg4.ie <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:00||Lúibíní (A) ||Iomaitheoirí idir 6 -10||Halla 2B, L.1, ICC"> 14:00 <i>Lúibíní (A)</i> Iomaitheoirí idir 6 -10 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:00||Logainmneacha Mhaigh Eo||'... agus Oidhreacht Dhún Chaocháin i mBarúntacht Iorrais||Svuít Copenhagen, L.2, Europa"> 14:00 <i>Logainmneacha Mhaigh Eo</i> ‘Logainmneacha agus Oidhreacht Dhún Chaocháin i mBarúntacht Iorrais <b>Svuít Copenhagen, L.2, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:00||Cur I Láthair || ar G. B. Adams, Caomhnóir Iarsmalann Daonchultúir Uladh||Svuít BÁC, L.2, Europa"> 14:00 <i>Cur i láthair</i> ar G. B. Adams, caomhnóir Iarsmalann Daonchultúir Uladh <b>Svuít BÁC, L.2, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:00||Seoladh Scéal.ie||Láithreán gréasáin úr (peig.ie mar a bhí)||Aonach an Oir., Halla 1, L.1, ICC"> 14:00 <i>Seoladh Scéal.ie</i> Láithreán gréasáin úr (peig.ie mar a bhí) <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:15||An Fheadóg Stáin (B) ||Iomaitheoirí idir 10-11||Seomra Cruinnithe 3, L.3, ICC"> 14:15 <i>An Fheadóg Stáin (B)</i> Iomaitheoirí idir 10-11 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:30||Aithriseoireacht (E)||Iomaitheoirí idir 12-13||Seomra Cruinnithe 2, L.3, ICC"> 14:30 <i>Aithriseoireacht (E)</i> Iomaitheoirí idir 12-13 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||14:30||Ceol Beirte (C)||Iomaitheoirí idir 13-17||Halla 2A, L.1, ICC"> 14:30 <i>Ceol Beirte (C)</i> Iomaitheoirí idir 13-17 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:00||Sceitse ||Comórtas do dhaoine fásta, Beo ar www.tg4.ie||An Stiúideo, ICC"> 15:00 <i>Sceitse </i> Comórtas do dhaoine fásta, Beo ar www.tg4.ie <b>An Stiúideo, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:00||Lúibíní (B) ||Iomaitheoirí idir 11-12||Halla 2B, L.1, ICC"> 15:00 <i>Lúibíní (B) </i> Iomaitheoirí idir 11-12 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:00||Seoladh Fotheidil||Córas a dhéanann trascríobh ar comhaid fuaime nó físeáin.||Aonach an Oir., Halla 1, L.1, ICC"> 15:00 <i>Seoladh Fotheidil</i> Córas a dhéanann trascríobh ar comhaid fuaime nó físeáin. <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:15||An Fheadóg Stáin (C) ||Iomaitheoirí idir 12-14||Seomra Cruinnithe 3, L.3, ICC"> 15:15 <i>An Fheadóg Stáin (C) </i> Iomaitheoirí idir 12-14 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:30||Rapcheol ||Iomaitheoirí faoi 10||Seomra Cruinnithe 2, L.3, ICC"> 15:30 <i>Rapcheol </i> Iomaitheoirí faoi 10 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||15:45||Lúibíní (C) ||Iomaitheoirí idir 14-17||Halla 2B, L.1, ICC"> 15:45 <i>Lúibíní (C) </i> Iomaitheoirí idir 14-17 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||16:00||Seoladh Leabhair||'Katie agus an Pacáiste Rúnda’ le Éadaoin Ní Dhomhnaill||Aonach an Oir., Halla 1, L.1, ICC"> 16:00 <i>Seoladh Leabhair</i> 'Katie agus an Pacáiste Rúnda’ le Éadaoin Ní Dhomhnaill <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||16:15||An Fheadóg Stáin (D) ||Iomaitheoirí idir 15-17||Seomra Cruinnithe 3, L.3, ICC"> 16:15 <i>An Fheadóg Stáin (D) </i> Iomaitheoirí idir 15-17 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||16:30||An Ghaeilge Agus An Dlí|| (i Teach an Dlí-Chumainn) || 96 Sráid Victoria"> 16:30 <i>An Ghaeilge Agus An Dlí</i> (i Teach an Dlí-Chumainn) <b> 96 Sráid Victoria, BT1 3GN</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||17:00||Seoladh Leabhair||'Lá San Iodáil i 1945' le Maria Ní Mhurchú||Aonach an Oir., Halla 1, L.1, ICC"> 17:00 <i>Seoladh Leabhair</i> 'Lá San Iodáil i 1945' le Maria Ní Mhurchú <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||17:00||Gearrscannán, Plé & Amhráin||‘Aisling fé Bhláth’ - scéim amhránaíochta Aisling Gheal, Múscraí.||Seomra Cruinnithe 1, L.3, ICC"> 17:00 <i>Gearrscannán, Plé & Amhráin</i> ‘Aisling fé Bhláth’ - scéim amhránaíochta Aisling Gheal, Múscraí. <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||17:00||Spraoi & Tuilleadh|| Spraoi, Dioscó Gaelach na Samhna, Siamsán na dTeidithe, Culaith bhréige.||Halla 2A, L.1, ICC"> 17:00 <i>Spraoi & Tuilleadh</i> Spraoi, Dioscó Gaelach na Samhna, Siamsán na dTeidithe, Culaith bhréige. <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||18:00||Dreas Cainte|| Comórtas do dhaoine fásta ||Seomra Cruinnithe 2, L.3, ICC"> 18:00 <i>Dreas Cainte </i> Comórtas do dhaoine fásta <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||18:00||Pop-Up Gréasán||le Gréasán Gaeilge na hEarnála Poiblí||Aonach an Oir., Halla 1, L.1, ICC"> 18:00 <i>Pop-Up Gréasán</i> le Gréasán Gaeilge na hEarnála Poiblí <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||18:00||Scéal Oileáin||Léacht - Saothar Liam agus Thomáis Uí Fhlaithearta||Halla 2A, L.1, ICC"> 18:00 <i>Scéal Oileáin</i> Léacht - Saothar Liam agus Thomáis Uí Fhlaithearta <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||18:30||Scéalaíocht||Comórtas Cáilithe do dhaoine fásta||An Stiúideo, Bunurlár, ICC"> 18:30 <i>Scéalaíocht</i> Comórtas Cáilithe do dhaoine fásta <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||19:00||Sean-Nós Na bhFear||Beo ar RTÉ Raidió na Gaeltachta agus www.tg4.ie||An Halla Mór, Bunurlár, ICC"> 19:00 <i>Sean-Nós Na bhFear</i> Beo ar RTÉ Raidió na Gaeltachta agus www.tg4.ie <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||19:30||Craoladh Beo||'Blas' ar BBC Gaeilge||Europa"> 19:30 <i>Craoladh Beo</i> 'Blas' ar BBC Gaeilge <b>Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||19:30||Craoladh Beo||'7 LÁ' craoladh beo ar TG4||Beár, L.2, ICC"> 19:30 <i>Craoladh Beo</i> '7 LÁ' craoladh beo ar TG4 <b>Beár, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||19:30*||Banat Al-Quds / Iníonacha Iarúsaléin||Cór agus grúpa ceoil uirlise as an bPalaistín||Halla Whitla, Ollscoil na Banríona"> 19:30* <i>Banat Al-Quds / Iníonacha Iarúsaléin</i> Cór agus grúpa ceoil uirlise as an bPalaistín <b>Halla Whitla, Ollscoil na Banríona </b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||20:00*||Dráma||Faoi Dheireadh Thiar le Joe Steve Ó Neachtain||Amh. Mhic Chionnaith, An Chultúrlann"> 20:00* <i>Dráma</i> Faoi Dheireadh Thiar le Joe Steve Ó Neachtain <b>Amh. Mhic Chionnaith, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||20:00||Láinseáil Flix Feirste||Féile Scannánaíochta na Ceathrún Gaeltachta & Léiriú 'Kneecap'||Barr an Tí, 12ú Urlár, Europa"> 20:00 <i>Láinseáil Flix Feirste</i>Féile Scannánaíochta na Ceathrún Gaeltachta & Léiriú 'Kneecap' <b>Barr an Tí, 12ú Urlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||21:00||Léamh agus amhráin||``Clann a Seanamhuintire'' le Breanndán Ó Beaglaoich ||An Bálseomra, Bunurlár, Europa"> 21:00 <i>Ceolchoirm Liteartha</i> Léamh agus amhráin ó Breanndán Ó Beaglaoich sliochta as a leabhar Clann a Seanamhuintire <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||22:00||Club Na Féile||Ceol ó Na Railway Boys||An Bálseomra, Bunurlár, Europa"> 22:00 <i>Club Na Féile</i> Ceol ó Na Railway Boys <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Déardaoin||22:30||Club Amhránaíochta||'Casadh an tSúgáin'||An Bálseomra, L.1, Europa"> 22:30 <i>Club Amhránaíochta</i> 'Casadh an tSúgáin' <b>An Bálseomra, L.1, Europa</b></label><br>
+    <div class="day-heading">Dé hAoine</div>
+<label><input type="checkbox" name="item" value="Dé hAoine||08:00||Craoladh Beo||'Adhmhaidin' ar RTÉ Raidió na Gaeltachta||Mol na Meán, Halla 1, L.1, ICC"> 8:00 <i>Craoladh Beo</i> 'Adhmhaidin' ar RTÉ Raidió na Gaeltachta <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Rbhahta: Damhsa ar an Sean-Nós (A)||Iomaitheoirí idir 5-8||An Bálseomra (1-3), L.1, Europa"> 9:30 <i>Rbhahta: Damhsa ar an Sean-Nós (A)</i> Iomaitheoirí idir 5-8 <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Rbhahta: Damhsa ar an Sean-Nós (E)||Iomaitheoirí 13||An Bálseomra, Bunurlár, Europa"> 9:30 <i>Rbhahta: Damhsa ar an Sean-Nós (E)</i> Iomaitheoirí 13 <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Amhránaíocht ar an Sean-Nós (A)||Iomaitheoirí faoi 6||Seomra Cruinnithe 1, L.3, ICC"> 9:30 <i>Amhránaíocht ar an Sean-Nós (A)</i> Iomaitheoirí faoi 6 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Amhránaíocht ar an Sean-Nós (D)||Iomaitheoirí 9||Seomra Cruinnithe 2, L.3, ICC"> 9:30 <i>Amhránaíocht ar an Sean-Nós (D)</i> Iomaitheoirí 9 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Amhránaíocht ar an Sean-Nós (G)||Iomaitheoirí idir 12-13||Seomra Cruinnithe 3, L.3, ICC"> 9:30 <i>Amhránaíocht ar an Sean-Nós (G)</i> Iomaitheoirí idir 12-13 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Corn Cuimhneacháin Mhúscraighe||Corn Cuimhneacháin Amhránaithe ar an Sean-Nós Mhúscraighe: Fir faoi 35||Halla 2B, L.1, ICC"> 9:30 <i>Corn Cuimhneacháin Mhúscraighe</i> Corn cuimhneacháin amhránaithe ar an Sean-Nós Mhúscraighe:Fir faoi 35 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||09:30||Corn Sheáin Óig Uí Thuama||Amhránaíocht ar an Sean-Nós: Mná faoi 35||Halla 2A, L.1, ICC"> 9:30 <i>Corn Cuimhneacháin Sheáin Óig Uí Thuama</i> Amhránaíocht ar an Sean-Nós: Mná faoi 35 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||10:00||Craoladh Beo||'Beo ar Maidin' ar Raidió Fáilte||Mol na Meán, Halla 1, L.1, ICC"> 10:00 <i>Craoladh Beo</i> 'Beo ar Maidin' ar Raidió Fáilte <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||10:00||An Seomra Teaghlaigh||Ó 10:00-17:00||ARC, Bunurlár, ICC"> 10:00 <i>An Seomra Teaghlaigh</i> Ó 10:00-17:00 <b>ARC, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||10:30||Rbhahta: Damhsa ar an Sean-Nós (B)||Iomaitheoirí 9-10||An Bálseomra (1-3), L.1, Europa"> 10:30 <i>Rbhahta: Damhsa ar an Sean-Nós (B)</i> Iomaitheoirí 9-10 <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||10:45||Rbhahta: Damhsa ar an Sean-Nós (F)|| Iomaitheoirí 14||An Bálseomra, Bunurlár, Europa"> 10:45 <i>Rbhahta: Damhsa ar an Sean-Nós (F) Iomaitheoirí 14</i> <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||10:45||Amhránaíocht ar an Sean-Nós (B)|| Iomaitheoirí 7||Seomra Cruinnithe 1, L.3, ICC"> 10:45 <i> Amhránaíocht ar an Sean-Nós (B)</i> Iomaitheoirí 7 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||11:00||Amhránaíocht ar an Sean-Nós (E)|| Iomaitheoirí 10||Seomra Cruinnithe 2, L.3, ICC"> 11:00 <i> Amhránaíocht ar an Sean-Nós (E)</i> Iomaitheoirí 10 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||11:00||Croladh Beo|| 'Barrscéalta' Craoladh beo ar RTÉ Raidió na Gaeltachta||Mol na Meán, Halla 1, L.1, ICC"> 11:00 <i></i> Craoladh Beo 'Barrscéalta' beo ar RTÉ Raidió na Gaeltachta <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||11:00||Seisiún Eolais: Slí Na Gaeltachta||Siúlóid féinthreoraithe i mBéal Feirste.||Aonach an Oir., Halla 1, L.1,ICC"> 11:00 <i>Seisiún Eolais: Slí Na Gaeltachta</i> Siúlóid féinthreoraithe i mBéal Feirste. <b>Aonach an Oir., Halla 1, L.1,ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||11:00||Pléphainéal||  Ról na nGael I Dtógáil Éire Nua ||An Stiúideo, Bunurlár, ICC"> 11:00 <i>Pléphainéal</i> Ról na nGael i dTógáil Éire Nua  <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||11:30||Amhránaíocht ar an Sean-Nós (H)||Iomaitheoirí 14-15||Seomra Cruinnithe 3, L.3, ICC"> 11:30 <i>Amhránaíocht ar an Sean-Nós (H)</i> Iomaitheoirí 14-15 <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00||Rbhahta: Damhsa ar an Sean-Nós (C)||Iomaitheoirí 11||An Bálseomra (1-3), L.1, Europa"> 12:00 <i>Rbhahta: Damhsa ar an Sean-Nós (C)</i> Iomaitheoirí 11 <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00||Rbhahta: Damhsa ar an Sean-Nós (G)||Iomaitheoirí 15||An Bálseomra, Bunurlár, Europa"> 12:00 <i>Rbhahta: Damhsa ar an Sean-Nós (G)</i> Iomaitheoirí 15 <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00||Amhránaíocht ar an Sean-Nós (C)||Iomaitheoirí 8||Seomra Cruinnithe 1, L.3, ICC"> 12:00 <i>Amhránaíocht ar an Sean-Nós (C)</i> Iomaitheoirí 8 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00||Seoladh Míleglór Na Nóg||Áis nua do thaifeadadh ar líne de ghuthanna páistí.||Aonach an Oir., Halla 1, L.1, ICC"> 12:00 <i>Seoladh Míleglór Na Nóg</i> Áis nua do thaifeadadh ar líne de ghuthanna páistí. <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00||Meitheal || Cé A Léifidh Leabhar Gaeilge?||Dánlann Dillon, An Chultúrlann"> 12:00 <i>Meitheal</i> Cé A Léifidh Leabhar Gaeilge?  <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||12:00*||Máistir-Rang Aisteoireachta|| 12:00-15:00. Os cionn 12 bliain d’aois.||An Leabharlann, L.1, Europa"> 12:00* <i>Máistir-Rang Aisteoireachta</i> 12:00-15:00. Os cionn 12 bliain d’aois. <b>An Leabharlann, L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Rbhahta: Damhsa ar an Sean-Nós (H)||Iomaitheoirí 16-17||An Bálseomra, Bunurlár, Europa"> 13:00 <i>Rbhahta: Damhsa ar an Sean-Nós (H)</i> Iomaitheoirí 16-17 <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Amhránaíocht ar an Sean-Nós (F)||Iomaitheoirí atá 11||Seomra Cruinnithe 2, L.3, ICC"> 13:00 <i>Amhránaíocht ar an Sean-Nós (F)</i> Iomaitheoirí atá 11 <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Rbhahta: Damhsa ar an Sean-Nós (D)||Iomaitheoirí atá 12||An Bálseomra (1-3), L.1, Europa"> 13:00 <i>Rbhahta: Damhsa ar an Sean-Nós (D)</i> Iomaitheoirí atá 12 <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Seoladh Leabhair||An Ghaeilge i lár Bhéal Feirste le Fionntán de Brún||Aonach an Oir., Halla 1, L.1,ICC"> 13:00 <i>Seoladh Leabhair</i> An Ghaeilge i lár Bhéal Feirste le Fionntán de Brún <b>Aonach an Oir., Halla 1, L.1,ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Craoladh Beo Ón Oireachtas||ar Raidió Fáilte agus Raidió na Life||Mol na Meán, Halla 1, L.1, ICC"> 13:00<i>Craoladh Beo Ón Oireachtas</i> ar Raidió Fáilte agus Raidió na Life <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:00||Pléphainéal|| Ról Na Gaeilge I bPríosún Na Ceise Fada ‘70dí - ‘80dí||Beár 2, L.2, ICC"> 13:00 <i>Pléphainéal</i> Ról Na Gaeilge i bPríosún na Ceise Fada ‘70dí - ‘80dí  <b>Beár 2, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:30||Amhránaíocht ar an Sean-Nós (I)||Iomaitheoirí atá 16-17||Seomra Cruinnithe 1, L.3, ICC"> 13:30 <i>Amhránaíocht ar an Sean-Nós (I)</i> Iomaitheoirí atá 16-17 <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:30||Corn Cuimhneacháin Chonamara||Corn Cuimhneacháin Amhránaithe Chonamara ar an Sean-Nós: Fir os cionn 35||Halla 2B, L.1, ICC"> 13:30 <i>Corn Cuimhneacháin Amhránaithe Chonamara</i> Amhránaíocht ar an Sean-Nós: Fir os cionn 35 <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||13:30||Ceardlann Pleanála Teanga || ó 13:30-16:00 le Foras Na Gaeilge||Bálseomra (4-5), L.1, Europa"> 13:30 <i>Ceardlann Pleanála Teanga</i> ó 13:30-16:00 le Foras Na Gaeilge <b>Bálseomra (4-5), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||14:00||Lúibíní|| Comórtas do dhaoine fásta, beo ar www.tg4.ie||An Stiúideo, Bunurlár, ICC"> 14:00 <i>Lúibíní</i> Comórtas do dhaoine fásta, beo ar www.tg4.ie <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||14:00||Rbhahta: Damhsa ar an Sean-Nós||Comórtas do dhaoine fásta||An Bálseomra, Bunurlár, Europa"> 14:00 <i>Rbhahta: Damhsa ar an Sean-Nós</i> Comórtas do dhaoine fásta <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||14:00||Seoladh Leabhair|| 'Seoda Na Sean......' Le Pádraig Mac Cárthaigh||Aonach an Oir., Halla 1, L.1, ICC"> 14:00 <i>Seoladh Leabhair</i> 'Seoda Na Sean......' le Pádraig Mac Cárthaigh<b>Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||14:00*||Dráma|| Faoi Dheireadh Thiar le Joe Steve Ó Neachtain||Amh. Mhic Chionnaith, An Chultúrlann"> 14:00* <i>Dráma</i> Faoi Dheireadh Thiar le Joe Steve Ó Neachtain <b>Amh. Mhic Chionnaith, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||14:30||Corn Mháire Nic Dhonnchadha || Amhránaíocht ar an Sean-Nós - Mná os cionn 35||Halla 2A, L.1, ICC"> 14:30 <i>Corn Mháire Nic Dhonnchadha </i> Amhránaíocht ar an Sean-Nós : Mná os cionn 35 <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||15:00||Mórsheoladh Leabhar Breac||||Dánlann Dillon, An Chultúrlann"> 15:00 <i>Mórsheoladh Leabhar Breac</i>  <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||15:00||Ár Dteanga, Ár Dteicneolaíocht||Intleacht Shaorga agus Todhchaí na Gaeilge agus Gaeltachta||Barr an Tí, L.12, Europa"> 15:00 <i>Ár Dteanga, Ár Dteicneolaíocht</i> Intleacht Shaorga agus Todhchaí na Gaeilge agus Gaeltachta <b>Barr an Tí, L.12, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||15:00||Craoladh beo||'Pé Scéal É' beo 15:00-17:00 ar RTÉ Raidió na Gaeltachta||Mol na Meán, Halla 1, L.1, ICC"> 15:00 <i>Craoladh beo</i> 'Pé Scéal É' beo 15:00-17:00 ar RTÉ Raidió na Gaeltachta <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||15:00||Seoladh: An Leabharlann Fháilteach||Scéim ó Gaeilge365 chun úsáid na Gaeilge a neartú i leabharlanna poiblí.||Aonach an Oir., Halla 1, L.1, ICC"> 15:00 <i>Seoladh: An Leabharlann Fháilteach</i> Scéim ó Gaeilge365 chun úsáid na Gaeilge a neartú i leabharlanna poiblí. <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||15:30||Amhrán Saothair || Comórtas do dhaoine fásta, beo ar www.tg4.ie||An Stiúideo, Bunurlár, ICC"> 15:30 <i>Amhrán Saothair </i> Comórtas do dhaoine fásta, beo ar www.tg4.ie <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:00||Amhrán Nuachumtha || Comórtas do dhaoine fásta, beo ar www.tg4.ie||An Stiúideo, Bunurlár,  ICC"> 16:00 <i>Amhrán Nuachumtha</i> Comórtas do dhaoine fásta, beo ar www.tg4.ie <b>An Stiúideo, Bunurlár,  ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:00||Tionóil Géarchéime Cearta||Plé a dhéanamh ar na chéad chéimeanna eile den fheachtas.||Beár 2, L.2, ICC"> 16:00 <i>Tionóil Géarchéime Cearta</i> Plé a dhéanamh ar na chéad chéimeanna eile den fheachtas. <b>Beár 2, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:00||Seoladh Suíomh Idirlíon||fisanphobail.com Cúrsaí Gaeilge in Iarthar Bhéal Feirste||Aonach an Oir., Halla 1, L.1, ICC"> 16:00 <i>Seoladh Suíomh Idirlíon</i> fisanphobail.com Cúrsaí Gaeilge in Iarthar Bhéal Feirste <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:00||Gearrscannán||An tAon Éan Amháin||Svuít BÁC, L.2, Europa"> 16:00 <i>Gearrscannán</i> An tAon Éan Amháin <b>Svuít BÁC, L.2, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:30||Ceardlann||Pléifear obair Thithe an Oireachtais||Seomra Cruinnithe 3, L.3, ICC"> 16:30 <i>Ceardlann</i> Pléifear obair Thithe an Oireachtais <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:30||Focal Ar Fhocal||Tionscadail Foclóireachta.||Seomra Cruinnithe 2, L.3, ICC"> 16:30 <i>Focal Ar Fhocal</i> Tionscadail Foclóireachta. <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||16:30||Pléphainéal||Litríocht do pháistí agus conas iad a spreagadh||Seomra Cruinnithe 1, L.3, ICC"> 16:30 <i>Pléphainéal</i> Litríocht do pháistí agus conas iad a spreagadh <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||17:00||Cuideachta Ag An Oireachtas||Roghnófar buaiteoirí na dtóraíochtaí, sólaistí deasa ar fáil.||Aonach an Oir., Halla 1, L.1, ICC"> 17:00 <i>Cuideachta Ag An Oireachtas</i> Roghnófar buaiteoirí na dtóraíochtaí, sólaistí deasa ar fáiL.<b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||17:00||Taispeántas Cartlann Gael Linn||||An Bálseomra (1-3), L.1, Europa"> 17:00 <i>Taispeántas Cartlann Gael Linn</i>  <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||17:00||Seoladh Leabhar||'I Muinín na nDúl' le Máire Wren agus 'Dordéan' le Róise Ní Bhaoill.||Beár 1, L.1, ICC"> 17:00 <i>Seoladh Leabhar</i> 'I Muinín na nDúl' le Máire Wren agus 'Dordéan' le Róise Ní BhaoilL.<b>Beár 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||17:30||Craoladh Beo Ón Oireachtas||Lár Stáitse beo ar TG4.||An Stáitse Mór, ICC"> 17:30 <i>Craoladh beo</i> Lár Stáitse beo ar TG4. <b>An Stáitse Mór, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Scéalaíocht: Príomhchomórtas||Comórtas do dhaoine fásta||An Stiúideo, Bunurlár, ICC"> 18:00 <i>Scéalaíocht: Príomhchomórtas</i> Comórtas do dhaoine fásta <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Seoladh Leabhair||'Sí' le Seán Ó Muireagáin||Beár 1, L.1, ICC"> 18:00 <i>Seoladh Leabhair</i> 'Sí' le Seán Ó Muireagáin <b>Beár 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Cuisle Na Gaeltachta||Deis do Chuisle bualadh le chéile le haghaidh seisiún siamsaíochta.||ARC, Bunurlár, ICC"> 18:00 <i>Cuisle Na Gaeltachta</i> Deis do Chuisle bualadh le chéile le haghaidh seisiún siamsaíochta. <b>ARC, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Ócáid Cheiliúrtha||Foilseacháin Ábhair Spioradálta (FÁS) ag ceiliúradh 70 bliain||Aonach an Oir., Halla 1, L.1, ICC"> 18:00 <i>Ócáid Cheiliúrtha</i> Foilseacháin Ábhair Spioradálta (FÁS) ag ceiliúradh 70 bliain <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Podchraoladh Beo 'Coinne Chultúir'||ag Raidió RíRá||Mol na Meán, Halla 1, L.1, ICC"> 18:00 <i>Podchraoladh Beo 'Coinne Chultúir'</i> ag Raidió RíRá <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:00||Seoladh & Pléphainéal||‘Deiseanna Gairmeacha le Gaeilge: Do Ghairm, do Theanga, do Thodhchaí’||Halla 2B, L.1, ICC"> 18:00 <i>Seoladh & Pléphainéal</i>‘Deiseanna Gairmeacha le Gaeilge: Do Ghairm, do Theanga, do Thodhchaí’ <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:30||Pléphainéal||Comhrá Cois Teallaigh le Comhaltaí Thithe an Oireachtais||Seomra Cruinnithe 3, L.3, ICC"> 18:30 <i>Pléphainéal</i> Comhrá Cois Teallaigh le Comhaltaí Thithe an Oireachtais <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||18:30||Seoladh Ábhar ar Dúchas.Ie||||Seomra Cruinnithe 2, L.3, ICC"> 18:30 <i>Seoladh Ábhar Ar Dúchas.Ie</i>  <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||19:00*||Seoladh Clár Tg4|| Scannán - AONTAS. i Cineworld ||Odyssey Arena, 2 Cé na Banríona"> 19:00* <i>Seoladh Clár Tg4</i>  Scannán - AONTAS. i Cineworld <b>Odyssey Arena, 2 Cé na Banríona</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||19:30||Sean-Nós Na Mban || Comórtas do dhaoine fásta, beo ar RnaG agus www.tg4.ie||An Halla Mór, Bunurlár, ICC"> 19:30 <i>Sean-Nós na Mban </i> Comórtas do dhaoine fásta, beo ar RnaG agus www.tg4.ie <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||21:00||Cóisir Na Mac Léinn||Cóisir gléasta le ceol ||Bálseomra, Bunurlár, Europa"> 21:00 <i>Cóisir Na Mac Léinn</i> Cóisir gléasta le ceol <b>Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||22:30||An Club Amhránaíochta||'Casadh an tSúgáin'||An Bálseomra (1-3), L.1, Europa"> 22:30 <i>An Club Amhránaíochta</i> 'Casadh an tSúgáin' <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||22:30||Seoladh Dlúthdhiosca||'Anáil an Dúchais' le Bríd Ní Mhaoilchiaráin||An Bálseomra (1-3), L.1, Europa"> 22:30 <i>Seoladh Dlúthdhiosca</i> 'Anáil an Dúchais' le Bríd Ní Mhaoilchiaráin <b>An Bálseomra (1-3), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé hAoine||22:30||Club Na Féile||Ceol ó Pólca 4||Halla Uladh"> 22:30 <i>Club Na Féile</i> Ceol ó Pólca 4 <b>Halla Uladh</b></label><br>
+    
+    <div class="day-heading">Dé Sathairn</div>
+<label><input type="checkbox" name="item" value="Dé Sathairn||9:30||#Parkrunabú!||Rith speisialta Oireachtas na Samhna 2025.||Páirc na bhFál"> 9:30 <i>#Parkrunabú!</i> Rith speisialta Oireachtas na Samhna 2025. <b>Páirc na bhFál</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||10:00||Comórtas Veidhlín || Do Dhaoine Fásta||An Stiúideo, Bunurlár, ICC"> 10:00 <i>Comórtas Veidhlín</i> Do dhaoine fásta  <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||10:30||Aontas Na Scríbhneoirí||Ollchruinniú an Oireachtais||Dánlann Dillon, An Chultúrlann"> 10:30 <i>Aontas Na Scríbhneoirí</i> Ollchruinniú an Oireachtais <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||10:30||Scéalta Nua Ó Gaois, DCU||Canúint.ie, Sráidaimn.ie agus Hiddenheritages.ai & uasdátú||Seomra Cruinnithe 1, L.3, ICC"> 10:30 <i>Scéalta Nua Ó Gaois, Dcu</i> Canúint.ie, Sráidaimn.ie agus Hiddenheritages.ai & uasdátú <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:00||Ceol Beirte || Comórtas do dhaoine fásta||An Stiúideo, ICC"> 11:00 <i>Ceol Beirte</i> Comórtas do dhaoine fásta</i>  <b>An Stiúideo, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:00||Seimineár An Oireachtais||'An ród seo romhainn'||Halla 2A, L.1, ICC"> 11:00 <i>Seimineár An Oireachtais</i> 'An ród seo romhainn' <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:00||Cóisir Cúla4||||Halla 2B, L.1, ICC"> 11:00 <i>Cóisir Cúla4</i>  <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:00||Seoladh Leabhair||'Atrocity Ár' le Ciarán  Ó Coigligh||Aonach an Oir., Halla 1, L.1, ICC"> 11:00 <i>Seoladh Leabhair</i> 'Atrocity Ár' le Ciarán  Ó Coigligh <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:00||Léamh Dráma||'Muinín' le Pádraig Mac Oscair||Barr an Tí, 12ú Urlár, Europa"> 11:00 <i>Léamh Dráma</i> 'Muinín' le Pádraig Mac Oscair <b>Barr an Tí, 12ú Urlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||11:30||Seoladh Dlúthdhiosca||'Amhráin Áine' le hÁine Durkin||Dánlann Dillon, An Chultúrlann"> 11:30 <i>Seoladh Dlúthdhiosca</i> 'Amhráin Áine' le hÁine Durkin <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:00||Craoladh Beo||'Seó an Oireachtais' ar RTÉ Raidió na Gaeltachta||Mol na Meán, Halla 1, L.1, ICC"> 12:00 <i>Craoladh Beo</i> 'Seó an Oireachtais' ar RTÉ Raidió na Gaeltachta <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:00||Spléachadh Ar Canúint.Ie||||Seomra Cruinnithe 1, L.3, ICC"> 12:00 <i>Spléachadh Ar Canúint.Ie</i>  <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:00||Seisiún Eolais Glórtha Nua||Glór na nDéise agus Fir Ultach. Plé ar thábhacht chanúintí sa teic AI.||Aonach an Oir., Halla 1, L.1, ICC"> 12:00 <i>Seisiún Eolais Glórtha Nua</i> Glór na nDéise agus Glór Fir Ultach. Plé ar thábhacht na gcanúintí sa teic AI. <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:00||An Clinic Leabhair||ó 12:00-16:00 Clinic Leabhar Pháistí||Seomra Boird 1, L.2, ICC"> 12:00 <i>An Clinic Leabhair</i> ó 12:00-16:00 Clinic Leabhar Pháistí <b>Seomra Boird 1, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:00||Áitribh na nGael||Bailiúchán - Baile, Báid & An Bás||Svuít BÁC, L.2, Europa"> 12:00 <i>Áitribh na nGael</i> Bailiúchán - Baile, Báid & An Bás <b>Svuít BÁC, L.2, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:30||Seimineár||Iriseoireacht Chlóite na Gaeilge - Ré Nua?||Seomra Cruinnithe 3, L.3, ICC"> 12:30 <i>Seimineár</i> Iriseoireacht Chlóite na Gaeilge - Ré Nua? <b>Seomra Cruinnithe 3, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:30||Príomhchomórtais Damhsa || Damhsa ar an Sean-Nós, gach aoisghrúpa, beo ar TG4||An Halla Mór, Bunurlár, ICC"> 12:30 <i>Príomhchomórtais Damhsa</i> Damhsa ar an Sean-Nós, gach aoisghrúpa, beo ar TG4 <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||12:30||Amhránaíocht nach Sean-Nós Í||Amhránaíocht aonair nach sean-nós í - Comórtas do dhaoine fásta||An Stiúideo, ICC"> 12:30 <i>Amhránaíocht nach Sean-Nós Í</i> Amhránaíocht aonair nach sean-nós í - Comórtas do dhaoine fásta <b>An Stiúideo, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||13:00||Ócáid Ómóis || Do Phádraig Ó Snodaigh||Amh. Mhic Chionnaith, An Chultúrlann"> 13:00 <i>Ócáid Ómóis</i> Do Phádraig Ó Snodaigh  <b>Amh. Mhic Chionnaith, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||13:00|| Ceiliúradh ||Breacadh ag ceiliúradh 25 bliain||ARC, Bunurlár, ICC"> 13:00 <i>Ceiliúradh</i>Breacadh ag ceiliúradh 25 bliain</i>  <b>ARC, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||13:00||Cruinniú na gCleasaithe||Ó 13:00-15:00 Léamh drámaí, plé, srl.||Barr an Tí, 12ú Urlár, Europa"> 13:00 <i>Ó 13:00-15:00 Cruinniú na gCleasaithe</i> Léamh drámaí, plé, srL.<b>Barr an Tí, 12ú Urlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||13:00||Ceiliúradh || Ceiliúradh pobal na Gaeilge Chaisleán Uidhilín||Aonach an Oir., Halla 1, L.1, ICC"> 13:00 <i>Ceiliúradh</i> Ceiliúradh pobal na Gaeilge Chaisleán Uidhilín  <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||13:30||Amhránaíocht Aonair le Giotáir ||Comórtas do dhaoine fásta, i gcuimhne ar Albert Fry||An Stiúideo, Bunurlár, ICC"> 13:30 <i>Amhránaíocht Aonair le Giotáir</i> Comórtas do dhaoine fásta, i gcuimhne ar Albert Fry <b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:00||An Chúirt Filíochta||Léamh agus cur in aithne d’fhilí||Amh. Mhic Chionnaith, An Chultúrlann"> 14:00 <i>An Chúirt Filíochta</i> Léamh agus cur in aithne d’fhilí <b>Amh. Mhic Chionnaith, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:00||Seoladh Leabhair||'Seán Ó hEochaidh: Bailitheoir Béaloidis' le Pádraig Ó Tiarnaigh||Beár 2, L.2, ICC"> 14:00 <i>Seoladh Leabhair</i> 'Seán Ó hEochaidh: Bailitheoir Béaloidis' le Pádraig Ó Tiarnaigh <b>Beár 2, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:00||Craoladh Beo||ar Raidió Fáilte agus Raidió na Life||Mol na Meán, Halla 1, L.1, ICC"> 14:00 - 16:00 <i>Craoladh Beo</i> ar Raidió Fáilte agus Raidió na Life <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:00||Úsáid Foclóir.Ie agus Teanglann.Ie||Conas iad a úsáid; uasdátú, plé ina dhiaidh.||Seomra Cruinnithe 2, L.3, ICC"> 14:00 <i>Úsáid Foclóir.Ie agus Teanglann.Ie</i> Conas iad a úsáid; uasdátú, plé ina dhiaidh. <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:00|| Ceiliúradh || Ceiliúradh pobal na Gaeilge Bhéal Feirste||Aonach an Oir., Halla 1, L.1, ICC"> 14:00 <i>Ceiliúradh</i> Ceiliúradh pobal na Gaeilge Bhéal Feirste</i>  <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||14:30||Scléip Na Samhna|| Ceol, amhránaíocht, siamsa...||Beár, Bunurlár, Europa"> 14:30 <i>Scléip Na Samhna</i> Ceol, amhránaíocht, siamsa... <b>Beár, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||15:00||Craobh Díospóireachta Gael Linn||Do mhic léinn tríú leibhéil||Halla 2A, L.1, ICC"> 15:00 <i>Craobh Díospóireachta Gael Linn</i> Do mhic léinn tríú leibhéil <b>Halla 2A, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||15:00||Seoladh Leabhair||'Fá Bhruach an Chladaigh' le Cormac Mac Giolla Easpaig||Beár 2, L.2, ICC"> 15:00 <i>Seoladh Leabhair</i> 'Fá Bhruach an Chladaigh' le Cormac Mac Giolla Easpaig <b>Beár 2, L.2, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||15:00||Siúlóid Threoraithe||15:00-17:00 i lár chathair Bhéal Feirste||TÚS: Primark, An Ascaill Ríoga"> 15:00<i>Siúlóid Threoraithe</i> 15:00-17:00 i lár chathair Bhéal Feirste <b>TÚS: Primark, An Ascaill Ríoga</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:00||An Pod Gaeilge Beo!||An chéad seó beo ag An Pod Gaeilge, sraith podchraoltaí Tuairisc||Seomra Cruinnithe 1, L.3, ICC"> 16:00 <i>An Pod Gaeilge Beo!</i> An chéad seó beo ag An Pod Gaeilge, sraith podchraoltaí Tuairisc <b>Seomra Cruinnithe 1, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:00||Sliocht - Dinnseanchas||Plé ar an dinnseanchas i litríocht na Gaeilge||Amh. Mhic Chionnaith, An Chultúrlann"> 16:00 <i>Sliocht - Dinnseanchas</i> Plé ar an dinnseanchas i litríocht na Gaeilge <b>Amh. Mhic Chionnaith, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:00||Seoladh Cláirseach Úrnua||Seolfar cláirseach nua leis an gcláirseoir aitheanta, Úna Ní Fhlannagáin||Aonach an Oir., Halla 1, L.1, ICC"> 16:00 <i>Seoladh Cláirseach Úrnua</i> Seolfar cláirseach nua leis an gcláirseoir aitheanta, Úna Ní Fhlannagáin <b>Aonach an Oir., Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:00||CCB AerachAiteachGaelach||Cruinniú chinn bhliana, comharghrúpa ealaíon LADTAIÉ+||Svuít BÁC, L.1, Europa"> 16:00 <i>CCB AerachAiteachGaelach</i> Cruinniú chinn bhliana, comharghrúpa ealaíon LADTAIÉ+ <b>Svuít BÁC, L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:30||Podchraoladh Beo||16:30-19:30 le foireann podchraoltaí Seachtain||Mol na Meán, Halla 1, L.1, ICC"> 16:30<i>Podchraoladh Beo</i>16:30-19:30 le foireann podchraoltaí Seachtain <b>Mol na Meán, Halla 1, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||16:30||Feachtas Gaelollscolaíochta|| Seoladh feachtas ó AMLÉ agus ó léachtóirí ar son GaelOllscolaíocht||Seomra Cruinnithe 2, L.3, ICC"> 16:30 <i>Feachtas Gaelollscolaíochta</i> Seoladh feachtas ó AMLÉ agus ó léachtóirí ar son GaelOllscolaíocht <b>Seomra Cruinnithe 2, L.3, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||17:00||Club na Féile na nÓg||Seisiún siamsaíochta do na hiomaitheoirí óga agus dá gcairde.||Halla 2B, L.1, ICC"> 17:00 <i>Club na Féile na nÓg</i> Seisiún siamsaíochta do na hiomaitheoirí óga agus dá gcairde. <b>Halla 2B, L.1, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||17:00||Léacht: Cé as a dtáinig an Sean-Nós||agus an ceangail atá aige le traidisiún cláirseoireachta na nGael.||An Stiúideo, Bunurlár, ICC"> 17:00 <i>Léacht: Cé as a dtáinig an Sean-Nós</i> agus an ceangail atá aige le traidisiún cláirseoireachta na nGaeL.<b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||17:00||Comhdháil na nGael||Tionscadal Cholmcille - Aoichainteoirí as Albain agus Manainn ag plé||An Bálseomra, L.1, Europa"> 17:00 <i>Comhdháil na nGael </i>Tionscadal Cholmcille - Aoichainteoirí as Albain agus Manainn ag plé <b>An Bálseomra, L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||17:00||Léamh Dráma||OCRAS||Barr an Tí, 12ú Urlár, Europa"> 17:00 <i>Léamh Dráma</i> OCRAS <b>Barr an Tí, 12ú Urlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||18:00||Mórsheoladh Leabhar||Seolfar leabhair nua thaighde agus liteartha||Dánlann Dillon, An Chultúrlann"> 18:00 <i>Mórsheoladh Leabhar</i> Seolfar leabhair nua thaighde agus liteartha <b>Dánlann Dillon, An Chultúrlann</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||19:00||Corn Uí Riada||Príomhchomórtas Amhránaíochta ar an Sean-Nós - RnaG & www.tg4.ie||An Halla Mór, Bunurlár, ICC"> 19:00 <i>Corn Uí Riada</i> Príomhchomórtas Amhránaíochta ar an Sean-Nós - RnaG & www.tg4.ie <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||20:00||Dráma Sa Dorchadhas||'An Eachtra', dráma bleachtaireachta ó pheann Nuala Ní Néill.||An Stiúideo, Bunurlár, ICC"> 20:00 <i>Dráma Sa Dorchadhas</i> 'An Eachtra', dráma bleachtaireachta ó Nuala Ní NéilL.<b>An Stiúideo, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||21:00||An Queercal Comhrá||Grúpa sóisialta le haghaidh cainteoirí Gaeilge LADTAIÉ+||An Leabharlann, L.1, Europa"> 21:00 <i>An Queercal Comhrá</i> Grúpa sóisialta le haghaidh cainteoirí Gaeilge LADTAIÉ+ <b>An Leabharlann, L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||22:00||Gaelgáirí||Club grinn Gaeilge||An Bálseomra (4-5), L.1, Europa"> 22:00 <i>Gaelgáirí</i> Club grinn Gaeilge <b>An Bálseomra (4-5), L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||22:30||Club Amhránaíochta||‘Casadh an tSúgáin’||An Bálseomra, L.1, Europa"> 22:30 <i>Club Amhránaíochta</i> ‘Casadh an tSúgáin’ <b>An Bálseomra, L.1, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||22:30||Club Na Féile||Ceol ó Seán Mac Corraidh agus The Hot Whiskeys||An Bálseomra, Bunurlár, Europa"> 22:30 <i>Club Na Féile</i> Ceol ó Seán Mac Corraidh agus The Hot Whiskeys <b>An Bálseomra, Bunurlár, Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Sathairn||22:30||Club Na Féile||Ceol ó Pólca 4||Halla Uladh"> 22:30 <i>Club Na Féile</i> Ceol ó Pólca 4 <b>Halla Uladh</b></label><br>    
+    <div class="day-heading">Dé Domhnaigh</div>
+<label><input type="checkbox" name="item" value="Dé Domhnaigh||11:00||Aifreann An Oireachtais||Craoladh beo ar RTÉ Raidió na Gaeltachta||Séipéal Naomh Muire, Lána an tSéipéil"> 11:00 <i>Aifreann An Oireachtais</i> Craoladh beo ar RTÉ Raidió na Gaeltachta <b>Séipéal Naomh Muire, Lána an tSéipéil</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Domhnaigh||12:00||Craoladh beo||'Togha agus Rogha' craoladh beo ar RTÉ Raidió na Gaeltachta||Europa"> 12:00 - 13:00 <i>Craoladh beo</i> 'Togha agus Rogha' craoladh beo ar RTÉ Raidió na Gaeltachta <b>Europa</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Domhnaigh||15:00||Seirbhís Phreispitéireach||||Eaglais Fitzroy, 77 Sráid na hOllscoile"> 15:00 <i>Seirbhís Phreispitéireach</i>  <b>Eaglais Fitzroy, 77 Sráid na hOllscoile</b></label><br>
+  </form>
+
+  <button onclick="generateSummary()">Cruthaigh Achoimre</button>
+
+  <div id="output">
+    <table id="summaryTable">
+      <thead>
+        <tr>
+          <th>Am</th>
+          <th>Teideal</th>
+          <th>Cur Síos</th>
+          <th>Suíomh</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <button id="printButton" onclick="window.print()" style="display: none;">Priontáil</button>
+  <button id="pdfButton" onclick="exportToPDF()" style="display: none;">Íoslódáil mar PDF</button>
+  <script>
+    function generateSummary() {
+      const checkboxes = document.querySelectorAll('input[name="item"]:checked');
+      const tbody = document.querySelector("#summaryTable tbody");
+      tbody.innerHTML = '';
+
+      if (checkboxes.length === 0) {
+        alert('Roghnaigh imeachtaí ar dtús.');
+        return;
+      }
+
+      const eventsByDay = {};
+
+      checkboxes.forEach(checkbox => {
+        const [day, time, title, description, location] = checkbox.value.split("||");
+
+        if (!eventsByDay[day]) {
+          eventsByDay[day] = [];
+        }
+
+        eventsByDay[day].push({ time, title, description, location });
+      });
+
+      for (const day of Object.keys(eventsByDay)) {
+        const row = document.createElement("tr");
+        const th = document.createElement("th");
+        th.textContent = day;
+        th.colSpan = 4;
+        th.style.background = '#ddd';
+        row.appendChild(th);
+        tbody.appendChild(row);
+
+        eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time)).forEach(event => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${event.time}</td>
+            <td><i>${event.title}</i></td>
+            <td>${event.description}</td>
+            <td><b>${event.location}</b></td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+
+      document.getElementById('output').style.display = 'block';
+      document.getElementById('printButton').style.display = 'inline-block';
+      document.getElementById('pdfButton').style.display = 'inline-block'; // Show PDF button
+    }
+  </script>
+  <script>
+  async function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById("output");
+
+    // Ensure summary is visible
+    if (element.style.display === "none") {
+      alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
+      return;
+    }
+
+    // Use html2canvas to render the visible part of the summary
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    // const { jsPDF } = window.jsdf; // FH NEW
+    const pdf = new jsPDF('portrait', 'mm', 'a4'); 
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pageWidth;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    // FH NEW - adding this to try allow multiple pages
+    
+const pxPerMm = 96 / 25.4;
+const pageHeightPx = pageHeight * pxPerMm;
+const totalPages = Math.ceil(canvas.height / pageHeightPx);
+
+for (let i = 0; i < totalPages; i++) {
+  const sourceY = i * pageHeightPx;
+  const canvasPage = document.createElement("canvas");
+  canvasPage.width = canvas.width;
+  canvasPage.height = pageHeightPx;
+
+  const ctx = canvasPage.getContext("2d");
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0,0,canvasPage.width, canvasPage.height);
+  ctx.drawImage(canvas, 0, -sourceY);
+
+  const imgDataPage = canvasPage.toDataURL("image/png");
+  
+  if (i > 0) pdf.addPage();
+  const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
+  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
+  }    
+    // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
+    // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
+    pdf.save("mo-imeachtaí.pdf");
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
