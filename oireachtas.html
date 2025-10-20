@@ -389,89 +389,53 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
   <script>
     
 function exportToPDF() {
- 
-function exportToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
 
-  const checkedInputs = document.querySelectorAll('input[name="item"]:checked');
-
-  if (checkedInputs.length === 0) {
-    alert("Roghnaigh imeachtaí le haghaidh do PDF.");
+  const outputElement = document.getElementById("output");
+  if (outputElement.style.display === "none") {
+    alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
     return;
   }
 
-  const eventsByDay = {};
-
-  // Group checked events by day
-  checkedInputs.forEach((input) => {
-    const [day, time, title, description, location] = input.value.split("||");
-
-    if (!eventsByDay[day]) {
-      eventsByDay[day] = [];
-    }
-
-    eventsByDay[day].push({
-      time,
-      title,
-      description,
-      location,
-    });
-  });
-
-  // Sort each day's events by time
-  Object.keys(eventsByDay).forEach((day) => {
-    eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time));
-  });
-
+// Prepare table rows from HTML
   const rows = [];
+  const tableRows = outputElement.querySelectorAll("tbody tr");
 
-  // Build PDF rows with section headers
-  for (const day in eventsByDay) {
-    // Day heading row
-    rows.push([
-      {
-        content: day,
-        colSpan: 4,
-        styles: {
-          fontStyle: "bold",
-          halign: "center",
-          fillColor: [240, 240, 240],
-        },
-      },
-    ]);
-
-    // Event rows
-    eventsByDay[day].forEach((event) => {
-      rows.push([
-        event.time,
-        event.title,
-        event.description,
-        event.location,
-      ]);
-    });
-  }
-
-  // Generate the PDF
-  pdf.autoTable({
-    startY: 20,
-    head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
-    body: rows,
-    styles: {
-      fontSize: 8,
-      cellPadding: 1,
-    },
-    theme: "grid",
-    didDrawPage: function (data) {
-      const pageSize = pdf.internal.pageSize;
-      const pageWidth = pageSize.width;
-      const pageHeight = pageSize.height;
-      pdf.text(`Page ${pdf.internal.getNumberOfPages()}`, pageWidth - 20, pageHeight - 10);
-    },
+  tableRows.forEach((tr) => {
+    const cells = tr.querySelectorAll("td, th");
+    const row = [];
+    cells.forEach((cell) => row.push(cell.innerText.trim()));
+    rows.push(row);
   });
+
+  // Split data into chunks of 60 rows
+  //const rowsPerPage = 60;
+  //let startY = 20;
+
+  //for (let i = 0; i < rows.length; i += rowsPerPage) {
+  //  const chunk = rows.slice(i, i + rowsPerPage);
+
+    pdf.autoTable({
+      startY: 20,
+      head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
+      body: rows,
+      margin: { top: 1, left: 1, right: 1 },
+      styles: {
+        fontSize: 8,
+        cellPadding: 1,
+      },
+      didDrawPage: function (data) {
+      }
+    });
+
+   // if (i + rowsPerPage < rows.length) {
+   //   pdf.addPage();
+   // }
+ // }
 
   pdf.save("mo-imeachtaí.pdf");
-}
+  }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
