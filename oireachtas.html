@@ -361,12 +361,14 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
       });
 
       for (const day of Object.keys(eventsByDay)) {
-        const row = document.createElement("tr");
+        const headingRow = document.createElement("tr"); // FH changed row to headingRow
         const td = document.createElement("td");
         td.textContent = day;
         td.colSpan = 4;
         td.style.background = '#ddd';
+        td.style.fontWeight = 'bold'; // FH added when adding heading
         //row.appendChild(th);
+        headingRow.appendChild(td); // FH added when adding heading
         td.style.textAlign = 'center';
 
         eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time)).forEach(event => {
