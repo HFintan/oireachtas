@@ -390,52 +390,26 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
     }
   </script>
   <script>
-  async function exportToPDF() {
-    const { jsPDF } = window.jspdf;
-    const element = document.getElementById("output");
+    function exportToPDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("portrait", "mm", "a4");
+  const outputElement = document.getElementById("output");
 
-    // Ensure summary is visible
-    if (element.style.display === "none") {
-      alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
-      return;
-    }
+  if (outputElement.style.display === "none") {
+    alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
+    return;
+  }
 
-    // Use html2canvas to render the visible part of the summary
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
+  pdf.html(outputElement, {
+    callback: function (pdf) {
+      pdf.save("mo-imeachtaí.pdf");
+    },
+    margin: 10,
+    autoPaging: 'text',
+    html2canvas: { scale: 1 }
+  });
+}
 
-    // const { jsPDF } = window.jsdf; // FH NEW
-    const pdf = new jsPDF('portrait', 'mm', 'a4'); 
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pageWidth;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-    // FH NEW - adding this to try allow multiple pages
-    
-const pxPerMm = 96 / 25.4;
-const pageHeightPx = pageHeight * pxPerMm;
-const totalPages = Math.ceil(canvas.height / pageHeightPx);
-
-for (let i = 0; i < totalPages; i++) {
-  const sourceY = i * pageHeightPx;
-  const canvasPage = document.createElement("canvas");
-  canvasPage.width = canvas.width;
-  canvasPage.height = pageHeightPx;
-
-  const ctx = canvasPage.getContext("2d");
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillRect(0,0,canvasPage.width, canvasPage.height);
-  ctx.drawImage(canvas, 0, -sourceY);
-
-  const imgDataPage = canvasPage.toDataURL("image/png");
-  
-  if (i > 0) pdf.addPage();
-  const imgPageHeight = (canvasPage.height * pdfWidth) / canvasPage.width;
-  pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
-  }    
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
     // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
     pdf.save("mo-imeachtaí.pdf");
