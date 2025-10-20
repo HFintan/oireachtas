@@ -400,6 +400,23 @@ function exportToPDF() {
     alert("Cruthaigh achoimre sula ndéanfaidh tú PDF a íoslódáil.");
     return;
   }
+
+  
+await pdf.html(outputElement, {
+    callback: function (pdf) {
+      // Mobile workaround
+      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        const blobUrl = pdf.output('bloburl');
+        window.open(blobUrl, '_blank');
+      } else {
+        pdf.save("mo-imeachtaí.pdf");
+      }
+    },
+    margin: 10,
+    autoPaging: 'text',
+    html2canvas: { scale: 1 },
+    width: pdf.internal.pageSize.getWidth()
+  });
 // Prepare table rows from HTML
   const rows = [];
   const tableRows = outputElement.querySelectorAll("tbody tr");
