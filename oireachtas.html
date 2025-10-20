@@ -19,7 +19,7 @@
     #output {
       display: none;
       margin-top: 2rem;
-      width: 100%
+      width: 100%;
       font-size: 12pt;
       line-height: 1.2;
     }
@@ -433,11 +433,11 @@ for (let i = 0; i < totalPages; i++) {
 
   if (i > 0) pdf.addPage();
   pdf.addImage(imgDataPage, 'PNG', 0, 0, pdfWidth, imgPageHeight);
-    
+  }    
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
     // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
     pdf.save("mo-imeachtaí.pdf");
-  }
+}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
