@@ -404,7 +404,7 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
     const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
-    //const pdf = new jsPDF('landscape', 'mm', 'a4');
+    const { jsPDF } = window.jsdf; // FH NEW
     const pdf = new jsPDF('portrait', 'mm', 'a4'); 
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -413,8 +413,29 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
     const pdfWidth = pageWidth;
     const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
+    // FH NEW - adding this to try allow multiple pages
+    
+const pxPerMm = 96 / 25.4;
+const pageHeightPx = pageHeight * pxPerMm;
+const totalPages = Math.ceil(canvas.height / pageHeightPx);
+
+for (let i = 0; i < totalPages; i++) {
+  const sourceY = i * pageHeightPx;
+  const canvasPage = document.createElement("canvas");
+  canvasPage.width = canvas.width;
+  canvasPage.height = pageHeightPx;
+
+  const ctx = canvasPage.getContext("2d");
+  ctx.drawImage(canvas, 0, -sourceY);
+
+  const imgDataPage = canvasPage.toDataURL("image/png");
+  const imgPageHeight = (canvasPage.height * imgWidth) / canvasPage.width;
+
+  if (i > 0) pdf.addPage();
+  pdf.addImage(imgDataPage, 'PNG', 0, 0, imgWidth, imgPageHeight);
+    
     // If content is taller than a page, scale accordingly or add pages (optional advanced handling)
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
+    // pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight); // FH NEW - removed this
     pdf.save("mo-imeachtaí.pdf");
   }
 </script>
