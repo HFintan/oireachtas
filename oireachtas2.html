@@ -410,27 +410,28 @@ function exportToPDF() {
   });
 
   // Split data into chunks of 60 rows
-  const rowsPerPage = 60;
-  let startY = 20;
+  //const rowsPerPage = 60;
+  //let startY = 20;
 
-  for (let i = 0; i < rows.length; i += rowsPerPage) {
-    const chunk = rows.slice(i, i + rowsPerPage);
+  //for (let i = 0; i < rows.length; i += rowsPerPage) {
+  //  const chunk = rows.slice(i, i + rowsPerPage);
 
     pdf.autoTable({
-      startY: startY,
+      startY: 20,
       head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
-      body: chunk,
+      body: rows,
       margin: { top: 1, left: 1, right: 1 },
       styles: {
         fontSize: 8,
         cellPadding: 1,
-      }
+      },
+      didDrawPage: function (data) {
     });
 
-    if (i + rowsPerPage < rows.length) {
-      pdf.addPage();
-    }
-  }
+   // if (i + rowsPerPage < rows.length) {
+   //   pdf.addPage();
+   // }
+ // }
 
   pdf.save("mo-imeachtaí.pdf");
   }
