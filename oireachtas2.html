@@ -365,12 +365,12 @@ tú d'amchlár. (4) Ag an bun, tá cnaipe chun an amchlár a easphortáil mar PD
 
       for (const day of Object.keys(eventsByDay)) {
         const row = document.createElement("tr");
-        const th = document.createElement("th");
-        th.textContent = day;
-        th.colSpan = 4;
-        th.style.background = '#ddd';
-        row.appendChild(th);
-        tbody.appendChild(row);
+        const td = document.createElement("td");
+        td.textContent = day;
+        td.colSpan = 4;
+        td.style.background = '#ddd';
+        //row.appendChild(th);
+        td.style.textAlign = 'center';
 
         eventsByDay[day].sort((a, b) => a.time.localeCompare(b.time)).forEach(event => {
           const row = document.createElement("tr");
@@ -424,7 +424,7 @@ function exportToPDF() {
       body: chunk,
       margin: { top: 1, left: 1, right: 1 },
       styles: {
-        fontSize: 10,
+        fontSize: 9,
         cellPadding: 1,
       }
     });
