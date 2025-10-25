@@ -41,94 +41,101 @@ th {
   font-size: 1.2em;
   font-weight: bold;
 }
-#pdfButton {
+button {
   margin-top: 1rem;
-  display: inline-block;
 }
 </style>
 </head>
 <body>
-
 <h2>Cruthaigh d'amchlár pearsanta le haghaidh Oireachtas '25:</h2>
 
 <form id="checklistForm">
-  <div class="day-heading">Dé Céadaoin</div>
-  <label data-color="189, 189, 189">
-    <input type="checkbox" name="item" value="Dé Céadaoin||11:00||Comórtas na gCór||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC">
-    11:00 <i>Comórtas na gCór</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b>
-  </label>
-  <label data-color="189, 189, 189">
-    <input type="checkbox" name="item" value="Dé Céadaoin||12:30||Comórtas na gCór||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC">
-    12:30 <i>Comórtas na gCór</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b>
-  </label>
-  <label data-color="189, 189, 189">
-    <input type="checkbox" name="item" value="Dé Céadaoin||13:00||Oscailt Oifigiúil na Féile|| ||ICC">
-    13:00 <i>Oscailt Oifigiúil na Féile</i> <b>ICC</b>
-  </label>
+<div class="day-heading">Dé Céadaoin</div>
+<label data-color="189, 189, 189">
+  <input type="checkbox" name="item" value="Dé Céadaoin||11:00||Comórtas na gCór||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC">
+  11:00 <i>Comórtas na gCór</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b>
+</label>
+<label data-color="189, 189, 189">
+  <input type="checkbox" name="item" value="Dé Céadaoin||12:30||Comórtas na gCór||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC">
+  12:30 <i>Comórtas na gCór</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b>
+</label>
+<label data-color="189, 189, 189">
+  <input type="checkbox" name="item" value="Dé Céadaoin||13:00||Oscailt Oifigiúil na Féile|| ||ICC">
+  13:00 <i>Oscailt Oifigiúil na Féile</i> <b>ICC</b>
+</label>
+
+<div class="day-heading">Dé Domhnaigh</div>
+<label data-color="255, 230, 230">
+  <input type="checkbox" name="item" value="Dé Domhnaigh||10:00||Seimineár||Cur síos||Áit">
+  10:00 <i>Seimineár</i> Cur síos <b>Áit</b>
+</label>
 </form>
 
-<div id="output">
-  <table>
-    <thead>
-      <tr>
-        <th>Am</th><th>Teideal</th><th>Cur Síos</th><th>Suíomh</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Rows will be dynamically added here -->
-    </tbody>
-  </table>
-</div>
+<!-- Buttons -->
+<button id="createButton" onclick="createTimetable()">Cruthaigh Amchlár</button>
+<button id="pdfButton" onclick="exportToPDF()" style="display:none;">Íoslódáil PDF</button>
 
-<button id="pdfButton" onclick="exportToPDF()">Íoslódáil PDF</button>
+<!-- Output Table -->
+<table id="output">
+  <thead>
+    <tr>
+      <th>Am</th>
+      <th>Teideal</th>
+      <th>Cur Síos</th>
+      <th>Suíomh</th>
+    </tr>
+  </thead>
+  <tbody id="outputTbody"></tbody>
+</table>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
 <script>
-const outputTbody = document.querySelector("#output tbody");
+const outputTbody = document.getElementById('outputTbody');
 
-// Example: dynamically populate table from form
-document.querySelectorAll('#checklistForm input[type="checkbox"]').forEach(cb => {
-  if(cb.checked) {
-    const tr = document.createElement('tr');
-    const [day,time,title,desc,place] = cb.value.split('||');
+function createTimetable() {
+  outputTbody.innerHTML = '';
 
-    tr.innerHTML = `
-      <td>${time}</td>
-      <td>${title}</td>
-      <td>${desc}</td>
-      <td style="background-color: rgb(${cb.parentElement.dataset.color});">${place}</td>
-    `;
-    outputTbody.appendChild(tr);
-  }
-});
+  document.querySelectorAll('#checklistForm input[type="checkbox"]').forEach(cb => {
+    if(cb.checked) {
+      const tr = document.createElement('tr');
+      const [day, time, title, desc, place] = cb.value.split('||');
+
+      tr.innerHTML = `
+        <td>${time}</td>
+        <td>${title}</td>
+        <td>${desc}</td>
+        <td style="background-color: rgb(${cb.parentElement.dataset.color});">${place}</td>
+      `;
+      outputTbody.appendChild(tr);
+    }
+  });
+
+  document.getElementById('pdfButton').style.display = 'inline-block';
+}
 
 function exportToPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
 
-  // Base64 image (example small PNG)
-  const imgData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...'; // shorten for demo
+  // Example image in base64
+  const imgData = 'data:image/png;base64,iVBORw0K...'; // replace with your actual base64 image
+  pdf.addImage(imgData, 'PNG', 10, 10, 180, 120);
 
-  // Add image (smaller for mobile)
-  const imgWidth = 150; 
-  const imgHeight = 100;
-  const imgX = 10;
-  const imgY = 10;
-  pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth, imgHeight);
-
-  // Build table rows
   const rows = [];
   outputTbody.querySelectorAll("tr").forEach(tr => {
     const cells = tr.querySelectorAll("td");
     const row = [];
     cells.forEach((cell, index) => {
-      if(index === 3) { // last column: Suíomh
-        const bg = cell.style.backgroundColor.match(/\d+/g);
-        row.push({
-          content: cell.innerText.trim(),
-          styles: { fillColor: bg ? bg.map(n=>parseInt(n)) : null }
-        });
+      if(index === 3) { // Last column: Suíomh
+        const bgColor = cell.style.backgroundColor;
+        const rgb = bgColor.match(/\d+/g);
+        if(rgb) {
+          row.push({ content: cell.innerText.trim(), styles: { fillColor: [parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2])] } });
+        } else {
+          row.push(cell.innerText.trim());
+        }
       } else {
         row.push(cell.innerText.trim());
       }
@@ -136,18 +143,15 @@ function exportToPDF() {
     rows.push(row);
   });
 
-  // Render table slightly after image to avoid mobile crash
-  setTimeout(() => {
-    pdf.autoTable({
-      startY: imgY + imgHeight + 5, // below image
-      head: [["Am","Teideal","Cur Síos","Suíomh"]],
-      body: rows,
-      margin: { top: 1, left: 1, right: 1 },
-      styles: { fontSize: 8, cellPadding: 1 }
-    });
+  pdf.autoTable({
+    startY: 140,
+    head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
+    body: rows,
+    margin: { top: 1, left: 1, right: 1 },
+    styles: { fontSize: 8, cellPadding: 1 },
+  });
 
-    pdf.save("mOireachtas25.pdf");
-  }, 50);
+  pdf.save("mOireachtas25.pdf");
 }
 </script>
 </body>
