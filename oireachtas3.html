@@ -414,6 +414,7 @@ function exportToPDF() {
  // FH - added this if function
  if (label && label.hasAttribute('data-color')){
    const color = label.getAttribute('data-color');
+console.log(`Row ${index + 1} color: ${color}`); // Log the color for debugging
    rowColor = color.split(',').map(num => parseInt(num.trim()));
  }
   
