@@ -391,8 +391,9 @@
     }
   </script>
   <script>
-    
+
 function exportToPDF() {
+  console.log("Export to PDF function is running"); // FH - added this
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
 
