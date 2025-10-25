@@ -130,8 +130,8 @@
   <form id="checklistForm">
     
     <div class="day-heading">Dé Céadaoin</div>
-<label data-color="255, 204, 204"><input type="checkbox" name="item" value="Dé Céadaoin||11:00||Comórtas na gCór||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC"> 11:00 <i>Comórtas na gCór</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
-<label data-color="255, 204, 204"><input type="checkbox" name="item" value="Dé Céadaoin||12:30||Comórtas na gCór||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC"> 12:30 <i>Comórtas na gCór</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||11:00||Comórtas na gCór||Comórtais do chóir bhunscoile||An Halla Mór, Bunurlár, ICC"> 11:00 <i>Comórtas na gCór</i> Comórtais do chóir bhunscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
+<label><input type="checkbox" name="item" value="Dé Céadaoin||12:30||Comórtas na gCór||Comórtais do chóir mheánscoile||An Halla Mór, Bunurlár, ICC"> 12:30 <i>Comórtas na gCór</i> Comórtais do chóir mheánscoile <b>An Halla Mór, Bunurlár, ICC</b></label><br>
 <label><input type="checkbox" name="item" value="Dé Céadaoin||13:00||Oscailt Oifigiúil na Féile|| ||ICC"> 13:00 <i>Oscailt Oifigiúil na Féile</i> <b>ICC</b></label><br>
 <label><input type="checkbox" name="item" value="Dé Céadaoin||14:30||Bronnadh Dhuaiseanna Liteartha || Duaiseanna Liteartha an Oireachtais||An Stiúideo, Bunurlár, ICC"> 14:30 <i>Bronnadh Dhuaiseanna</i> Duaiseanna Liteartha an Oireachtais <b>An Stiúideo, Bunurlár, ICC</b></label><br>
 <label><input type="checkbox" name="item" value="Dé Céadaoin||15:30||Ag Scríobh don Scáileán||Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta||An Stiúideo, Bunurlár, ICC"> 15:30 <i>Ag Scríobh don Scáileán</i> Scéim Forbartha Scríbhneoirí agus Scéalaithe Gaeltachta <b>An Stiúideo, Bunurlár, ICC</b></label><br>
@@ -391,9 +391,8 @@
     }
   </script>
   <script>
-
+    
 function exportToPDF() {
-  console.log("Export to PDF function is running"); // FH - added this
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("portrait", "mm", "a4");
 
@@ -407,59 +406,24 @@ function exportToPDF() {
   const rows = [];
   const tableRows = outputElement.querySelectorAll("tbody tr");
 
-  tableRows.forEach((tr, index) => { // FH - added index, trying to get colour working
+  tableRows.forEach((tr) => {
     const cells = tr.querySelectorAll("td, th");
-    const label = tr.querySelector("label"); // FH added line
-    let rowColor = [255,255,255]; // FH - added line; default colour is white
-
- // FH - added this if function
- if (label && label.hasAttribute('data-color')){
-   const color = label.getAttribute('data-color');
-console.log(`Row ${index + 1} color: ${color}`); // Log the color for debugging
-    rowColor = color.split(',').map(num => parseInt(num.trim()));
- } else {
-      console.log("No label with data-color in row $(index + 1)");
-    }
-
-const row = [];
-cells.forEach((cell, cellIndex) => {
-  const cellText = cell.innerText.trim();
-  
-    
- if (cellsIndex === 3 {
-    row.push([{
-      content: cellText,
+ if (cells.length === 1 && cells[0].colSpan === 4) { // FH - added this if loop
+    rows.push([{
+      content: cells[0].innerText.trim(),
+      colSpan: 4,
       styles: {
         fontStyle: 'bold',
         halign: 'center',
-        fillColor: rowColor
+        fillColor: [230, 230, 230]
       }
     }]);
   } else {
-//    const row = [];
-//    cells.forEach((cell) => row.push(cell.innerText.trim()));
-//    rows.push(row);
-// FH - changed this else loop from here   
-row.push(cellText);
- }
-});
+    const row = [];
+    cells.forEach((cell) => row.push(cell.innerText.trim()));
     rows.push(row);
+ }
   });
-        // Check if this is the "Suíomh" column (index 3), and apply background color
-     //   if (cellIndex === 3) { // "Suíomh" column
-      //    row.push({
-       //     content: cellText,
-        //    styles: {
-         //     fillColor: rowColor // Apply the color from the label's data-color
-          //  }
-          //});
-        //} else {
-         // row.push(cellText);
-       // }
-      //});
-     // rows.push(row);
-// } // FH - to here
-//  });
 
   // Split data into chunks of 60 rows
   //const rowsPerPage = 60;
@@ -468,8 +432,6 @@ row.push(cellText);
   //for (let i = 0; i < rows.length; i += rowsPerPage) {
   //  const chunk = rows.slice(i, i + rowsPerPage);
 
-  console.log("Rows to be added to PDF:", rows);
-  
     pdf.autoTable({
       startY: 20,
       head: [["Am", "Teideal", "Cur Síos", "Suíomh"]],
