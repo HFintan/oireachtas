@@ -410,31 +410,29 @@ function exportToPDF() {
   tableRows.forEach((tr, index) => { // FH - added index, trying to get colour working
     const cells = tr.querySelectorAll("td, th");
     const label = tr.querySelector("label"); // FH added line
-    console.log(`Row ${index +1}:`);
     let rowColor = [255,255,255]; // FH - added line; default colour is white
 
  // FH - added this if function
- if (label) {
-   console.log("Label found:", label); 
-    if (label.hasAttribute('data-color')){
+ if (label && label.hasAttribute('data-color')){
    const color = label.getAttribute('data-color');
 console.log(`Row ${index + 1} color: ${color}`); // Log the color for debugging
     rowColor = color.split(',').map(num => parseInt(num.trim()));
  } else {
-      console.log("No data-color attribute found.");
+      console.log("No label with data-color in row $(index + 1)");
     }
- } else {
-   console.log("No label element found.");
- }
+
+const row = [];
+cells.forEach((cell, cellIndex) => {
+  const cellText = cell.innerText.trim();
   
- if (cells.length === 1 && cells[0].colSpan === 4) {
-    rows.push([{
-      content: cells[0].innerText.trim(),
-      colSpan: 4,
+    
+ if (cellsIndex === 3 {
+    row.push([{
+      content: cellText,
       styles: {
         fontStyle: 'bold',
         halign: 'center',
-        fillColor: [230, 230, 230]
+        fillColor: rowColor
       }
     }]);
   } else {
@@ -442,25 +440,26 @@ console.log(`Row ${index + 1} color: ${color}`); // Log the color for debugging
 //    cells.forEach((cell) => row.push(cell.innerText.trim()));
 //    rows.push(row);
 // FH - changed this else loop from here   
-const row = [];
-      cells.forEach((cell, cellIndex) => {
-        const cellText = cell.innerText.trim();
-        
-        // Check if this is the "Suíomh" column (index 3), and apply background color
-        if (cellIndex === 3) { // "Suíomh" column
-          row.push({
-            content: cellText,
-            styles: {
-              fillColor: rowColor // Apply the color from the label's data-color
-            }
-          });
-        } else {
-          row.push(cellText);
-        }
-      });
-      rows.push(row);
- } // FH - to here
+row.push(cellText);
+ }
+});
+    rows.push(row);
   });
+        // Check if this is the "Suíomh" column (index 3), and apply background color
+     //   if (cellIndex === 3) { // "Suíomh" column
+      //    row.push({
+       //     content: cellText,
+        //    styles: {
+         //     fillColor: rowColor // Apply the color from the label's data-color
+          //  }
+          //});
+        //} else {
+         // row.push(cellText);
+       // }
+      //});
+     // rows.push(row);
+// } // FH - to here
+//  });
 
   // Split data into chunks of 60 rows
   //const rowsPerPage = 60;
