@@ -410,6 +410,7 @@ function exportToPDF() {
   tableRows.forEach((tr, index) => { // FH - added index, trying to get colour working
     const cells = tr.querySelectorAll("td, th");
     const label = tr.querySelector("label"); // FH added line
+    console.log(`Row ${index +1}:`);
     let rowColor = [255,255,255]; // FH - added line; default colour is white
 
  // FH - added this if function
@@ -418,7 +419,7 @@ function exportToPDF() {
     if (label.hasAttribute('data-color')){
    const color = label.getAttribute('data-color');
 console.log(`Row ${index + 1} color: ${color}`); // Log the color for debugging
-   let rowColor = color.split(',').map(num => parseInt(num.trim()));
+    rowColor = color.split(',').map(num => parseInt(num.trim()));
  } else {
       console.log("No data-color attribute found.");
     }
